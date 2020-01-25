@@ -16,20 +16,45 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    Tickets: []
+    currPage: "Home",
+    Ticket: {
+      uploaded: false,
+      id: 0,
+      type: 'null',
+      url: 'null',
+      upvotes: 0,
+      downvotes: 0,
+      score: 0,
+      comments: {
+      
+      }
+    }
+  }
+
+  togglePageFlag = () => {
+    if (this.state.currPage === "Home") {
+      this.setState({ currPage: "Tickets" })
+    } else if (this.state.currPage === "Tickets") {
+      this.setState({ currPage: "Home" })
+    }
   }
 
   render() {
+    let thispage = <Home />
+    if (this.state.currPage === "Home") {
+      thispage = <Home />
+    } else if (this.state.currPage === "Tickets") {
+      thispage = <Tickets />
+    }
     return (
         <div className="App">
           <header className="App-header">
             <Header />
-            <Home />
+            {thispage}
           </header>
         </div>
     );
   }
-  
 }
 
 export default App;
