@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Header extends Component {
     render() {
         return (
-            <h1>header</h1>
+            <nav fixed="top" class="nav">
+                <ul>
+                    <li class="brand">Fake News</li>
+                    <li>About Us</li>
+                    <li>How to Use</li>
+                </ul>
+            </nav>
         );
     }
-}
-
-const headerStyle = {
-    background: '#B895AF',
-    color: '#fff',
-    textAlign: 'center',
-    padding: '10px'
 }
 
 export default Header;

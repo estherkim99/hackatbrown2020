@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.nav {
+  background-color: #271828;
+  color: #B895AF;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  height: 2em;
+  text-align: left;
+}
+
+.nav .brand {
+  color: #EC8E72;
+  font-size: 1em;
+
+}
+
+.nav li{
+  list-style: none;
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 0em 1em;
+
+
+}
