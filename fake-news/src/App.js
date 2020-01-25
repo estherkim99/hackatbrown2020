@@ -1,4 +1,6 @@
 import React from 'react';
+import Tickets from './components/Tickets.js';
+import './App.css';
 
 function App() {
 

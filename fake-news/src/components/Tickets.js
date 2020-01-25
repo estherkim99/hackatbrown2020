@@ -12,10 +12,6 @@ class Todos extends Component {
 
 function App() {
 
-  state = {
-    
-  }
-
   return (
     <div className="App">
       <header className="App-header">
