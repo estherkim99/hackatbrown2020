@@ -4,6 +4,9 @@ import Home from './components/Home.js';
 import Header from './components/layout/Header.js';
 import './App.css';
 import uuid from 'uuid';
+import {
+  Router, Route, Link
+} from 'react-router-dom'
 
 class App extends Component {
 
@@ -18,14 +21,12 @@ class App extends Component {
 
   render() {
     return (
-      // <Router>
         <div className="App">
           <header className="App-header">
             <Header />
             <Home />
           </header>
         </div>
-      // </Router>
     );
   }
   
