@@ -8,7 +8,7 @@ class Header extends Component {
         return (
             <nav fixed="top" class="nav">
                 <ul>
-                    <li class="brand">Fake News</li>
+                    <li class="brand"><a href="#home">VERA</a></li>
                     <li>About Us</li>
                     <li>How to Use</li>
                 </ul>
