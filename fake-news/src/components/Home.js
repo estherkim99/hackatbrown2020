@@ -29,7 +29,8 @@ class Home extends Component {
         return (
             <body>
                 <div>
-                    <hl>Fake News App!</hl>
+                    <hl>We are the first crowdsourced platform on the internet harnessing the power of the public to verify the truthfulness forwarded messages and media.
+If you received a photo, message or link that you'd like to verify, select the appropriate type from the dropdown box below and upload your ticket to continue.</hl>
                 </div>
                 <select value={this.state.searchType} onChange={this.changeHandler}>
                     <option value='link'>link</option>
