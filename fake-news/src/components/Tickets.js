@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 
-class Todos extends Component {
+class Tickets extends Component {
     render() {
         return (
-            <div className="App">
+            <div className="Tickets">
                 <hl>Tickets</hl>
             </div>
         );
     }
 }
 
-function App() {
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Fake News App, yo</h1>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export default Tickets;
