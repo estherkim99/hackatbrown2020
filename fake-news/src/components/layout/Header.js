@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-function Header() {
-    return (
-        <header style={headerStyle}>
-            <h1>----- This is the header -----</h1>
-        </header>
-    )
+class Header extends Component {
+    render() {
+        return (
+            <h1>header</h1>
+        );
+    }
 }
 
 const headerStyle = {

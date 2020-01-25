@@ -7,6 +7,9 @@ import uuid from 'uuid';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Router, Route, Link
+} from 'react-router-dom'
 
 class App extends Component {
 
@@ -39,7 +42,7 @@ class App extends Component {
             <Home />
           </header>
         </div>
-      </div>
+      </div >
     );
   }
 
