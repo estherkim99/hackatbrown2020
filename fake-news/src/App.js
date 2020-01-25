@@ -6,8 +6,8 @@ import uuid from 'uuid';
 
 class App extends Component {
 
-  const db = firebase.database();
-  const dbRef = db.ref().child('data');
+  // const db = firebase.database();
+  // const dbRef = db.ref().child('data');
 
   state = {
     Tickets: []
