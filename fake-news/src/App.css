@@ -53,6 +53,15 @@
 
 }
 
+.descript {
+  color: #B895AF;
+  font-size: 0.75em;
+  margin: 0;
+  padding: 5em 18em;
+
+
+}
+
 a {
   text-decoration: none;
   font-weight: 800;
