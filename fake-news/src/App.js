@@ -2,6 +2,7 @@ import React from 'react';
 // import Tickets from './components/Tickets.js';
 import Home from './components/Home.js';
 import './App.css';
+import uuid from 'uuid';
 
 function App() {
 
