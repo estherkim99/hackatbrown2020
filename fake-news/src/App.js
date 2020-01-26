@@ -36,7 +36,8 @@ class App extends Component {
       data: null,
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
-      docId: null
+      docId: null,
+      id: null
     }
   }
 
@@ -49,7 +50,8 @@ class App extends Component {
         data: data,
         upvotes: this.state.upvotes, // following is scoring metrics for each given ticket
         downvotes: this.state.downvotes,
-        docId: this.state.docId
+        docId: this.state.docId,
+        id: this.state.id
       }
     })
   }
@@ -95,7 +97,8 @@ class App extends Component {
             data: data,  // actual data
             upvotes: 0, // following is scoring metrics for each given ticket
             downvotes: 0,
-            docId: null
+            docId: null,
+            id: uuid.v4()
           }
         }
       )
@@ -111,15 +114,11 @@ class App extends Component {
               upvotes: 0, // following is scoring metrics for each given ticket
               downvotes: 0,
 <<<<<<< HEAD
-<<<<<<< HEAD
               docId: docRef.id
 =======
               docId: docRef.ids,
               id: this.state.id
 >>>>>>> 42a27f6ddc8955c4a1ef57ff3df3646a128e4fa0
-=======
-              docId: docRef.ids
->>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
             }
           }
         );
@@ -139,6 +138,7 @@ class App extends Component {
           this.upvotes = documentSnapshot.get("upvotes");
           this.downvotes = documentSnapshot.get("downvotes");
           this.docId = documentSnapshot.get("docId");
+          this.id = documentSnapshot.get("id");
         });
     }
     });
@@ -152,7 +152,6 @@ class App extends Component {
     // checkTicket will eturn a promise that is ultimately refid
     // go through database, check for a hit on all tickets for matching data and data
    //  const promise = this.checkTicket(data);
-<<<<<<< HEAD
 <<<<<<< HEAD
    const promise = db.collection("ticket").doc(this.state.docId);
    promise.then(docRef => {docRef.update(this.state.ticket);
@@ -170,8 +169,6 @@ class App extends Component {
     //       return docSnapshots[0].ref.id;
     //     }
     //   });
-=======
->>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
   }
 >>>>>>> 42a27f6ddc8955c4a1ef57ff3df3646a128e4fa0
 
@@ -182,9 +179,12 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes + 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
+        downvotes: this.state.ticket.downvotes,
+        docId: this.state.ticket.docId,
+        id: this.state.ticket.id
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   minusUpScore = () => {
@@ -194,9 +194,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes - 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
+        downvotes: this.state.ticket.downvotes,
+        docId: this.state.ticket.docId,
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   // function to increase downvote by 1
@@ -207,9 +209,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes + 1
+        downvotes: this.state.ticket.downvotes + 1,
+        docId: this.state.ticket.docId,
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   minusDownScore = () => {
@@ -219,9 +223,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes - 1
+        downvotes: this.state.ticket.downvotes - 1,
+        docId: this.state.ticket.docId,
       }
     })
+    this.updateTicketLocalToFirebase();
   }
 
   handleHome = () => {
