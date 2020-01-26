@@ -11,26 +11,26 @@ class Content extends Component {
     }
 
     setDownvote() {
-        this.setState({
-            downvoteActive: !this.state.downvoteActive  // flips
-        })
-        if (!this.state.downvoteActive) {
+        if (this.state.downvoteActive) {
             this.props.minusDown();
         } else {
             this.props.plusDown();
         }
+        this.setState({
+            downvoteActive: !this.state.downvoteActive  // flips
+        })
         
     }
 
     setUpvote() {
-        this.setState({
-            upvoteActive: !this.state.upvoteActive  // flips
-        })
-        if (!this.state.upvoteActive) {
+        if (this.state.upvoteActive) {
             this.props.minusUp();
         } else {
             this.props.plusUp();
         }
+        this.setState({
+            upvoteActive: !this.state.upvoteActive  // flips
+        })
         
     }
 
@@ -58,7 +58,8 @@ class Content extends Component {
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness : {(this.props.ticket.upvotes - this.props.ticket.downvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes)}</h2>
+                        <h2>Truthworthiness :  
+                            {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
                         <h3>Upvotes: {this.props.ticket.upvotes}</h3>
                         <h3>Downvotes: {this.props.ticket.downvotes}</h3>
                     </div>
