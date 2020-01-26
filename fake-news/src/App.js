@@ -17,7 +17,7 @@ firebase.initializeApp({
   appId: "1:557519037753:web:fc75a0f0c2b455713534e8",
   measurementId: "G-XVE5XLSR39"
 });
-var db = firebase().firestore();
+// var db = firebase().firestore();
 // import {
 //   Router, Route, Link
 // } from 'react-router-dom'
@@ -29,7 +29,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       id: null,  // unique ID for each ticket
@@ -74,17 +74,17 @@ class App extends Component {
   
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-  checkTicket = (data, type) => {
-    const snapshot = db.collection("ticket").where("data", "==", data).get();
-    if(snapshot.empty){
-      return 0;
-    }
-    else{
-      const docSnapshots = snapshot.docs;
-      const doc = docSnapshots[0].data();
-      return doc.id;
-    }
-  }
+  // checkTicket = (data, type) => {
+  //   // const snapshot = db.collection("ticket").where("data", "==", data).get();
+  //   if(snapshot.empty){
+  //     return 0;
+  //   }
+  //   else{
+  //     const docSnapshots = snapshot.docs;
+  //     const doc = docSnapshots[0].data();
+  //     return doc.id;
+  //   }
+  // }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {
