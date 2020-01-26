@@ -11,14 +11,7 @@ class Content extends Component {
         downvoteActive: false,
         upvoteActive: false,
         commentInput: null,
-        comments: [
-            // {
-            //     commentId: null,
-            //     ticketId: null,
-            //     // creator: null,
-            //     contentText: null
-            // }
-        ]
+        comments: []
     }
 
     setDownvote() {
@@ -66,13 +59,12 @@ class Content extends Component {
         const newComment = {
             commentId: uuid.v4(),
             ticketId: this.props.ticket.id,
-            commentInput: this.state.commentInput
+            commentText: this.state.commentInput
         }
         this.setState({
             comments: [...this.state.comments, newComment],
             commentInput: ''
         })
-        // add comment
     }
 
     onChange = (e) => {
@@ -93,9 +85,7 @@ class Content extends Component {
                             {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
                         <h3>Upvotes: {this.props.ticket.upvotes}</h3>
                         <h3>Downvotes: {this.props.ticket.downvotes}</h3>
-                    </div>
 
-                    <div>
                         <button
                             onClick={() => this.handleUpvote()}
                             className={c({ ["active"]: this.state.upvoteActive })}
@@ -108,10 +98,6 @@ class Content extends Component {
                             >
                             {this.props.ticket.downvotes}
                         </button>
-                    </div>
-
-                    <div>
-                        <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
                     </div>
 
                     <div>
@@ -133,12 +119,7 @@ class Content extends Component {
                                     style={{ flex: '1' }}
                                 />
                             </form>
-                            {/* <form action="#" method="post">
-                                <textarea placeholder="What are your thoughts about this article?" name="comment"></textarea>
-                                <div>
-                                    <button type="submit">Submit</button>
-                                </div>
-                            </form> */}
+                            <Comments comments={this.state.comments} />
                         </div>
                     </div>
                 </section>
