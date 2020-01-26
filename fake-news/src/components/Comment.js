@@ -3,17 +3,16 @@ import React, { Component } from 'react';
 export class Comment extends Component {
     getStyle = () => {
         return {
-            background: '#f4f4#f4',
             padding: '10px',
-            borderBottom: '1px #ccc dotted',        }
+            borderBottom: '1px #ccc dotted',
+        }
     }
-
+    // const contentInput = this.props.comment.contentInput;
     render() {
-        const contentInput = this.props.comment.contentInput;
         return (
             <div style={this.getStyle()}>
                 <p>
-                    { contentInput }
+                    {this.props.comment.contentInput}
                 </p>
             </div>
         )
