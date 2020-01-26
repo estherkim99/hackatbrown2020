@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 
 class Content extends Component {
     render() {
-        let score = 50;
         return (
             <div class="content-container">
                 <section class="content-display">
-                    <p>show content here</p>
+                    <p>{this.props.ticket.data}</p>
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness : {score}</h2>
-                        <h3>User Votes: ?</h3>
-                        <h3>Vera Score: ?</h3>
+                        <h2>Truthworthiness : {(this.props.ticket.upvotes - this.props.ticket.downvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes)}</h2>
+                        <h3>User Votes: {this.props.ticket.upvotes}</h3>
+                        <h3>Vera Score: {this.props.ticket.downvotes}</h3>
                     </div>
 
                     <div>
