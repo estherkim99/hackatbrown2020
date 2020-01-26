@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-var request = require('request');
-var cheerio = require('cheerio');
 
 class Home extends Component {
     constructor(props) {
@@ -10,17 +8,6 @@ class Home extends Component {
             data: null
         };
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    crawler = (URL) => {
-        request(URL, function (err, response, body) {
-            if (!err && response.statusCode == 200) {
-                var $ = cheerio.load(body);
-                return $('title').text() + $('body').text();
-            } else {
-                return "Invalid website link."
-            }
-        })
     }
 
     changeHandler = (event) => {
@@ -49,9 +36,6 @@ class Home extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.searchType === 'link') {
-            this.state.data = this.crawler(this.state.data);
-        }
         this.props.setTicket(this.state.data, this.state.searchType);
         // this.props.setTicketData(this.state.data);
         // this.props.toggle();
