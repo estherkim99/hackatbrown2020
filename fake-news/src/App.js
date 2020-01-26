@@ -75,7 +75,6 @@ class App extends Component {
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
-<<<<<<< HEAD
     const snapshot = db.collection("ticket").where("data", "==", data).get();
     if(snapshot.empty){
       return 0;
