@@ -9,6 +9,17 @@ a {
   font-weight: 800;
 }
 
+button {
+  width: 60px;
+  height: 40px;
+  margin: 0 rem;
+}
+
+.active {
+  border: 1px solid EC8E72;
+  background-color: cornsilk;
+}
+
 .App {
   text-align: center;
 }

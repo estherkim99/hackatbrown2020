@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 export class Comment extends Component {
     getStyle = () => {
         return {
-            // fontSize: 'medium',
-            borderBottom: '1px #ccc dotted',        }
+            background: '#f4f4#f4',
+            padding: '10px',
+            borderBottom: '1px #ccc dotted',
+        }
     }
     // const contentInput = this.props.comment.contentInput;
     render() {

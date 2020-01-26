@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import c from "classnames";
 import uuid from 'uuid';
 import Comments from './components/Comments.js'
+import Display from './components/Display.js'
 
 class Content extends Component {
 
@@ -77,11 +78,11 @@ class Content extends Component {
         return (
             <div class="content-container">
                 <section class="content-display">
-                    <p>{this.props.ticket.data}</p>
+                    <Display ticket={this.props.ticket}/>
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness :
+                        <h2>Truth Rating:
                             {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
                         <h3>Upvotes: {this.props.ticket.upvotes}</h3>
                         <h3>Downvotes: {this.props.ticket.downvotes}</h3>
