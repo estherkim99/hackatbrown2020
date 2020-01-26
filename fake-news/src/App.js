@@ -36,7 +36,8 @@ class App extends Component {
       data: null,
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
-      docId: null
+      docId: null,
+      id: null
     }
   }
 
@@ -49,7 +50,8 @@ class App extends Component {
         data: data,
         upvotes: this.state.upvotes, // following is scoring metrics for each given ticket
         downvotes: this.state.downvotes,
-        docId: this.state.docId
+        docId: this.state.docId,
+        id: this.state.id
       }
     })
   }
@@ -95,7 +97,8 @@ class App extends Component {
             data: data,  // actual data
             upvotes: 0, // following is scoring metrics for each given ticket
             downvotes: 0,
-            docId: null
+            docId: null,
+            id: uuid.v4()
           }
         }
       )
@@ -110,7 +113,8 @@ class App extends Component {
               data: data,  // actual data
               upvotes: 0, // following is scoring metrics for each given ticket
               downvotes: 0,
-              docId: docRef.ids
+              docId: docRef.ids,
+              id: this.state.id
             }
           }
         );
@@ -130,6 +134,7 @@ class App extends Component {
           this.upvotes = documentSnapshot.get("upvotes");
           this.downvotes = documentSnapshot.get("downvotes");
           this.docId = documentSnapshot.get("docId");
+          this.id = documentSnapshot.get("id");
         });
     }
     });
@@ -143,6 +148,18 @@ class App extends Component {
     // checkTicket will eturn a promise that is ultimately refid
     // go through database, check for a hit on all tickets for matching data and data
    //  const promise = this.checkTicket(data);
+    // this now returns a promise, if you want value of check ticket you want a ret before db.collection
+    // checkTicket will eturn a promise that is ultimately refid
+    // const hit = db.collection("ticket").where("id", "==", this.state.ticket.id).get().then(snapshot => {
+    //     // console.log(snapshot);
+    //     if (snapshot.empty === true) {
+    //       return 0;
+    //     }
+    //     else {
+    //       const docSnapshots = snapshot.docs;
+    //       return docSnapshots[0].ref.id;
+    //     }
+    //   });
   }
 
   // function to increase ticket upvote state field by 1
@@ -152,9 +169,12 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes + 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
+        downvotes: this.state.ticket.downvotes,
+        docId: this.state.ticket.docId,
+        id: this.state.ticket.id
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   minusUpScore = () => {
@@ -164,9 +184,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes - 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
+        downvotes: this.state.ticket.downvotes,
+        docId: this.state.ticket.docId,
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   // function to increase downvote by 1
@@ -177,9 +199,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes + 1
+        downvotes: this.state.ticket.downvotes + 1,
+        docId: this.state.ticket.docId,
       }
-    })
+    });
+    this.updateTicketLocalToFirebase();
   }
 
   minusDownScore = () => {
@@ -189,9 +213,11 @@ class App extends Component {
         type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
         data: this.state.ticket.data,
         upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes - 1
+        downvotes: this.state.ticket.downvotes - 1,
+        docId: this.state.ticket.docId,
       }
     })
+    this.updateTicketLocalToFirebase();
   }
 
   handleHome = () => {
