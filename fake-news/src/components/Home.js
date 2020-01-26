@@ -26,23 +26,12 @@ class Home extends Component {
     render() {
         let searchBox = '';
         if (this.state.searchType === 'link') {
-          this.setState({
-            searchType: 'link',
-            selectedFile: null
-          })
           searchBox = <p>Paste link to article</p>
 
         } else if (this.state.searchType === 'screenshot') {
-          this.setState({
-            searchType: 'screenshot',
-            selectedFile: null
-          })
             searchBox =  <input type="file" name="file" onChange={this.onChangeHandler}/>
-        } else if (this.state.searchType === "text") {
-          this.setState({
-            searchType: 'text',
-            selectedFile: null
-          })
+        
+          } else if (this.state.searchType === "text") {
             searchBox = <p>Paste article text</p>
 
         }
