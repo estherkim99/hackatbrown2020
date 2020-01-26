@@ -49,7 +49,7 @@ class App extends Component {
   }
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-  checkTicket = (data, type) => {  
+  checkTicket = (data, type) => {
 
   }
 
@@ -58,7 +58,7 @@ class App extends Component {
 
     if (type === 'text') {
       // go through database, check for a hit on all tickets for matching data and data
-      firebase.database.ref("ticket") //  TODO
+      // firebase.database.ref("ticket") //  TODO
     }
 
     // check to see if we have matching entry in database
