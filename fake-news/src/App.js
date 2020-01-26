@@ -105,7 +105,7 @@ class App extends Component {
   // }
 
   // function to increase ticket upvote state field by 1
-  upScore = () => {
+  plusUpScore = () => {
     this.setState({
       ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
         id: this.state.ticket.id,  // unique ID for each ticket
@@ -117,8 +117,20 @@ class App extends Component {
     })
   }
 
+  minusUpScore = () => {
+    this.setState({
+      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+        id: this.state.ticket.id,  // unique ID for each ticket
+        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+        data: this.state.ticket.data,
+        upvotes: this.state.ticket.upvotes - 1, // following is scoring metrics for each given ticket
+        downvotes: this.state.ticket.downvotes
+      }
+    })
+  }
+
   // function to increase downvote by 1
-  decrementScore = () => {
+  plusDownScore = () => {
     this.setState({
       ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
         id: this.state.ticket.id,  // unique ID for each ticket
@@ -130,6 +142,18 @@ class App extends Component {
     })
   }
 
+  minusDownScore = () => {
+    this.setState({
+      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+        id: this.state.ticket.id,  // unique ID for each ticket
+        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+        data: this.state.ticket.data,
+        upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
+        downvotes: this.state.ticket.downvotes - 1
+      }
+    })
+  }
+
   render() {
     let thispage = <Home />
     if (this.state.currPage === "Home") {
@@ -137,7 +161,7 @@ class App extends Component {
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
     } else if (this.state.currPage === "Content") {
-      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
+      thispage = <Content minusDown={this.minusDownScore} minusUp={this.minusUpScore} plusDown={this.plusDownScore} plusUp={this.plusUpScore} ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     }
     return (
       <div className="App">
