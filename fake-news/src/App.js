@@ -62,16 +62,17 @@ class App extends Component {
 
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-  checkTicket = (data, type) => {
-  db.collection("ticket").where("data", "==", data).get().then(snapshot => {
+  checkTicket = (data) => {
+  // this now returns a promise, if you want value of check ticket you want a ret before db.collection
+  // checkTicket will eturn a promise that is ultimately refid
+  return db.collection("ticket").where("data", "==", data).get().then(snapshot => {
       console.log(snapshot);
       if (snapshot.empty === true) {
         return 0;
       }
       else {
         const docSnapshots = snapshot.docs;
-        const docRef = docSnapshots[0].ref();
-        return docRef.id;
+        return docSnapshots[0].ref.id;
       }
     });
   }
@@ -80,9 +81,8 @@ class App extends Component {
   setTicket = (data, type) => {
 
     // go through database, check for a hit on all tickets for matching data and data
-    const ret = this.checkTicket(data, type);
-    return;
-
+    const promise = this.checkTicket(data);
+    promise.then(ret => { // this pulls ret from the promise
     // if miss, make new local ticket
     if (ret === 0) {
       this.setState(  // set local state to that of new ticket
@@ -97,7 +97,7 @@ class App extends Component {
         }
       )
       // upload new ticket to firebase
-      db.collection("ticket").doc(data).add(this.ticket);
+      db.collection("ticket").add(this.state.ticket); // TODO: Look up API on how to add a document to a collection
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
       db.collection("ticket")
@@ -110,6 +110,17 @@ class App extends Component {
           this.downvotes = documentSnapshot.get("downvotes");
         });
     }
+    });
+
+    this.togglePageFlag();
+
+  }
+
+  updateTicketLocalToFirebase = () => {
+    // this now returns a promise, if you want value of check ticket you want a ret before db.collection
+    // checkTicket will eturn a promise that is ultimately refid
+    // go through database, check for a hit on all tickets for matching data and data
+   //  const promise = this.checkTicket(data);
   }
 
   // function to increase ticket upvote state field by 1
