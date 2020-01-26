@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import c from "classnames";
 
 class Content extends Component {
 
@@ -10,6 +11,11 @@ class Content extends Component {
     }
 
     setDownvote() {
+        if (this.state.downvoteActive) {
+            this.props.minusDown();
+        } else {
+            this.props.plusDown();
+        }
         this.setState({
             downvoteActive: !this.state.downvoteActive  // flips
         })
@@ -17,7 +23,31 @@ class Content extends Component {
     }
 
     setUpvote() {
+        if (this.state.upvoteActive) {
+            this.props.minusUp();
+        } else {
+            this.props.plusUp();
+        }
+        this.setState({
+            upvoteActive: !this.state.upvoteActive  // flips
+        })
+        
+    }
 
+    handleDownvote() {
+        if (this.state.upvoteActive) {
+            this.setDownvote();
+            this.setUpvote();
+        }
+        this.setDownvote();
+    }
+
+    handleUpvote() {
+        if (this.state.downvoteActive) {
+            this.setUpvote();
+            this.setDownvote();
+        }
+        this.setUpvote();
     }
 
     render() {
@@ -28,9 +58,25 @@ class Content extends Component {
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness : {(this.props.ticket.upvotes - this.props.ticket.downvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes)}</h2>
-                        <h3>User Votes: {this.props.ticket.upvotes}</h3>
-                        <h3>Vera Score: {this.props.ticket.downvotes}</h3>
+                        <h2>Truthworthiness :  
+                            {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
+                        <h3>Upvotes: {this.props.ticket.upvotes}</h3>
+                        <h3>Downvotes: {this.props.ticket.downvotes}</h3>
+                    </div>
+
+                    <div>
+                        <button
+                            onClick={() => this.handleUpvote()}
+                            className={c({ ["active"]: this.state.upvoteActive })}
+                            >
+                            {this.props.ticket.upvotes}
+                        </button>
+                        <button
+                            className={c({ ["active"]: this.state.downvoteActive })}
+                            onClick={() => this.handleDownvote()}
+                            >
+                            {this.props.ticket.downvotes}
+                        </button>
                     </div>
 
                     <div>
