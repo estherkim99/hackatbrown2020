@@ -110,8 +110,20 @@ class App extends Component {
               data: data,  // actual data
               upvotes: 0, // following is scoring metrics for each given ticket
               downvotes: 0,
-              docId: docRef.id,
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+              docId: docRef.id
+=======
+              docId: docRef.ids,
               id: this.state.id
+>>>>>>> 42a27f6ddc8955c4a1ef57ff3df3646a128e4fa0
+=======
+              docId: docRef.ids
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
+=======
+              docId: docRef.ids
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
             }
           }
         );
@@ -140,12 +152,17 @@ class App extends Component {
   }
 
   updateTicketLocalToFirebase = () => {
-  }
     // this now returns a promise, if you want value of check ticket you want a ret before db.collection
     // checkTicket will eturn a promise that is ultimately refid
     // go through database, check for a hit on all tickets for matching data and data
    //  const promise = this.checkTicket(data);
-    
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+   const promise = db.collection("ticket").doc(this.state.docId);
+   promise.then(docRef => {docRef.update(this.state.ticket);
+  });
+=======
     // this now returns a promise, if you want value of check ticket you want a ret before db.collection
     // checkTicket will eturn a promise that is ultimately refid
     // const hit = db.collection("ticket").where("id", "==", this.state.ticket.id).get().then(snapshot => {
@@ -158,6 +175,12 @@ class App extends Component {
     //       return docSnapshots[0].ref.id;
     //     }
     //   });
+=======
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
+=======
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
+  }
+>>>>>>> 42a27f6ddc8955c4a1ef57ff3df3646a128e4fa0
 
   // function to increase ticket upvote state field by 1
   plusUpScore = () => {
