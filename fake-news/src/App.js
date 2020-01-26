@@ -4,6 +4,7 @@ import Home from './components/Home.js';
 import Header from './components/layout/Header.js';
 import './App.css';
 import uuid from 'uuid';
+import Content from './Content.js';
 
 // import {
 //   Router, Route, Link
@@ -76,6 +77,8 @@ class App extends Component {
       thispage = <Home />
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
+    } else if (this.state.currPage === "Content") {
+      thispage = <Content />
     }
     return (
       <div className="App">
