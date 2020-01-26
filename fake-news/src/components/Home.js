@@ -38,8 +38,8 @@ class Home extends Component {
                 </div>
 
         } else if (this.state.searchType == 'picture') {
-            searchBox = <input type="file" name="file" onChange={this.onChangeHandler} />
-
+            searchBox = <div><input type="file" name="file" onChange={this.onChangeHandler} />
+            </div>
 
         } else if (this.state.searchType == "text") {
             searchBox =
