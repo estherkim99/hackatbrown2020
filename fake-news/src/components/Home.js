@@ -64,7 +64,9 @@ class Home extends Component {
         } else if (this.state.searchType === 'picture') {
             searchBox =
                 <form onSubmit={this.onSubmit}>
+                    <div>
                         <input type="file" name="file" onChange={this.onChangeHandler} />
+                    </div>
                     <input
                         type="submit"
                         value="Submit"
@@ -95,12 +97,6 @@ class Home extends Component {
         }
         return (
             <body>
-                <div>
-
-                </div>
-                 <div>
-                    
-                </div>
                 <div class="descript">
                     <hl>We are the first crowdsourced platform on the internet harnessing the power of the public to verify the truthfulness of forwarded messages and media.<br /><br />
                         If you received a photo, message or link that you'd like to verify, select the appropriate type from the dropdown box below and upload your ticket to continue.</hl>
