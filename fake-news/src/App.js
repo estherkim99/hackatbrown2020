@@ -29,7 +29,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       type: null, // type of ticket - can be text, link, or photo. string.
@@ -64,7 +64,8 @@ class App extends Component {
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
     const snapshot = db.collection("ticket").where("data", "==", data).get();
-    if (snapshot.empty) {
+    console.log(snapshot.empty);
+    if (snapshot.empty === true) {
       return 0;
     }
     else {

@@ -98,9 +98,6 @@ class Content extends Component {
                         >
                             {this.props.ticket.downvotes}
                         </button>
-                    </div>
-
-                    <div>
                         <h2>Comments</h2>
                         <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
@@ -119,8 +116,8 @@ class Content extends Component {
                                     style={{ flex: '1' }}
                                 />
                             </form>
-                            <Comments comments={this.state.comments} />
                         </div>
+                        <Comments comments={this.state.comments} />
                     </div>
                 </section>
             </div >

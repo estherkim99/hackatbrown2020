@@ -36,7 +36,7 @@ class Home extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        // this.props.setTicket(this.state.data, this.state.searchType);
+        this.props.setTicket(this.state.data, this.state.searchType);
         // this.props.setTicketData(this.state.data);
         // this.props.toggle();
     }
