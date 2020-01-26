@@ -6,7 +6,7 @@ export class Display extends Component {
     render() {
         if (this.props.ticket.type === "picture") {
             // return picture
-            const pic = this.props.ticket.data;
+            const pic = './pudding.jpeg';
             return <img src={pic} alt="Logo" />;
         } else {
             return (
