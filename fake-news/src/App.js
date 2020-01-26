@@ -24,9 +24,9 @@ class App extends Component {
       id: null,  // unique ID for each ticket
       type: null, // type of ticket - can be text, link, or photo. string.
       url: null,  // firebase url for raw actual data
-
-      upvotes: null, // following is scoring metrics for each given ticket
-      downvotes: null,
+      data: "Lorem ipsum mixed berry fruit & grain cereal bar",
+      upvotes: 7, // following is scoring metrics for each given ticket
+      downvotes: 3,
     },
 
     comments: { // Represents relevant comments to current ticket. Has placeholder numm values
@@ -88,7 +88,7 @@ class App extends Component {
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
     } else if (this.state.currPage === "Content") {
-      thispage = <Content />
+      thispage = <Content ticket={this.state.ticket}/>
     }
     return (
       <div className="App">
