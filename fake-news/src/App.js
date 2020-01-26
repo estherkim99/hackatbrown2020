@@ -18,24 +18,23 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-      id: 0,  // unique ID for each ticket
-      type: 'null', // type of ticket - can be text, link, or photo. string.
-      url: 'null',  // firebase url for raw actual data
+      id: null,  // unique ID for each ticket
+      type: null, // type of ticket - can be text, link, or photo. string.
+      url: null,  // firebase url for raw actual data
 
-      upvotes: 0, // following is scoring metrics for each given ticket
-      downvotes: 0,
-      score: 0,
+      upvotes: null, // following is scoring metrics for each given ticket
+      downvotes: null,
     },
 
     comments: { // Represents relevant comments to current ticket. Has placeholder numm values
       1: {
-        commentId: 0,
-        ticketId: 0,
-        creator: 'null',
-        contentText: 'null'
+        commentId: null,
+        ticketId: null,
+        creator: null,
+        contentText: null
       }
     }
   }
