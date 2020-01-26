@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import Comment from './Comment.js'
 
 class Comments extends Component {
   render() {
@@ -8,9 +8,9 @@ class Comments extends Component {
     //   <TodoItem key={todo.id} todo={todo} markComplete=
     //   {this.props.markComplete} delTodo = {this.props.delTodo}/>
     // ));
-    return {
-
-    }
+    return this.props.comments.map((comment) => (
+        <Comment comment={comment}/>
+    ));
   }
 }
 

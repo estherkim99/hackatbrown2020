@@ -30,7 +30,7 @@ class Content extends Component {
         this.setState({
             downvoteActive: !this.state.downvoteActive  // flips
         })
-        
+
     }
 
     setUpvote() {
@@ -42,7 +42,7 @@ class Content extends Component {
         this.setState({
             upvoteActive: !this.state.upvoteActive  // flips
         })
-        
+
     }
 
     handleDownvote() {
@@ -69,7 +69,8 @@ class Content extends Component {
             commentInput: this.state.commentInput
         }
         this.setState({
-            comments: [...this.state.comments, newComment]
+            comments: [...this.state.comments, newComment],
+            commentInput: ''
         })
         // add comment
     }
@@ -88,7 +89,7 @@ class Content extends Component {
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness :  
+                        <h2>Truthworthiness :
                             {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
                         <h3>Upvotes: {this.props.ticket.upvotes}</h3>
                         <h3>Downvotes: {this.props.ticket.downvotes}</h3>
@@ -98,13 +99,13 @@ class Content extends Component {
                         <button
                             onClick={() => this.handleUpvote()}
                             className={c({ ["active"]: this.state.upvoteActive })}
-                            >
+                        >
                             {this.props.ticket.upvotes}
                         </button>
                         <button
                             className={c({ ["active"]: this.state.downvoteActive })}
                             onClick={() => this.handleDownvote()}
-                            >
+                        >
                             {this.props.ticket.downvotes}
                         </button>
                     </div>
@@ -113,22 +114,24 @@ class Content extends Component {
                         <h2>Comments</h2>
                         <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="title"
                                     style={{ flex: '10', padding: '5px' }}
                                     placeholder="Add comment..."
                                     value={this.state.commentInput}
                                     onChange={this.onChange}
-                                /> 
-                                <input 
-                                    type="submit" 
+                                />
+                                <input
+                                    type="submit"
                                     value="Submit"
                                     className="btn"
                                     style={{ flex: '1' }}
                                 />
                             </form>
-                            <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
+                            <div>
+                                <Comments comments={this.state.comments} commentInput={this.state.commentInput} />
+                            </div>
                             {/* <form action="#" method="post">
                                 <textarea placeholder="What are your thoughts about this article?" name="comment"></textarea>
                                 <div>
