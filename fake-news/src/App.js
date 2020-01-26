@@ -99,11 +99,11 @@ class App extends Component {
   render() {
     let thispage = <Home />
     if (this.state.currPage === "Home") {
-      thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData}/>
+      thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
     } else if (this.state.currPage === "Content") {
-      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag}/>
+      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag} />
     }
     return (
       <div className="App">
