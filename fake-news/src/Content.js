@@ -78,7 +78,7 @@ class Content extends Component {
         return (
             <div class="content-container">
                 <section class="content-display">
-                    <Display ticket={this.props.ticket}/>
+                    <p>BEIJING/SHANGHAI (Reuters) - The ability of the new coronavirus to spread is strengthening and infections could continue to rise, China’s National Health Commission said on Sunday, with more than 2,000 people in China infected and 56 killed by the disease.</p>
                 </section>
                 <section class="content-analysis">
                     <div>
