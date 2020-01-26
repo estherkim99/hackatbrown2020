@@ -12,7 +12,7 @@ import Content from './Content.js';
 
 class App extends Component {
 
-  // const db = firebase.database();
+  // const db = firebase.firestore();
   // const dbRef = db.ref().child('data');
 
   // set up way to switch between home and tickets pages
@@ -23,7 +23,7 @@ class App extends Component {
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       id: 0,  // unique ID for each ticket
       type: 'null', // type of ticket - can be text, link, or photo. string.
-      url: 'null',  // firebase url for raw actual data
+      data: 'null',  // firebase url for raw actual data
 
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
@@ -47,10 +47,19 @@ class App extends Component {
       this.setState({ currPage: "Home" })
     }
   }
+  
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
-
+    const snapshot = db.collection("ticket").where("data", "==", data).get();
+    if(snapshot.empty){
+      return 0;
+    }
+    else{
+      docSnapshots = snapshot.docs;
+      const doc = docSnapshots[0].data();
+      return doc.id;
+    }
   }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
@@ -59,6 +68,10 @@ class App extends Component {
     if (type === 'text') {
       // go through database, check for a hit on all tickets for matching data and data
       // firebase.database.ref("ticket") //  TODO
+      const ret = checkTicket(data, type);
+      if(ret){
+
+      }
     }
 
     // check to see if we have matching entry in database
@@ -72,7 +85,7 @@ class App extends Component {
         ticket: {
           id: uuid.v4(),  // unique ID for each ticket
           type: type, // type of ticket - can be text, link, or photo. string.
-          url: 'TODO',  // firebase url for raw actual data
+          data: 'TODO',  // firebase url for raw actual data
 
           upvotes: 0, // following is scoring metrics for each given ticket
           downvotes: 0,
