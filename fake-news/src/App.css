@@ -38,6 +38,19 @@
   text-align: left;
 }
 
+.btn {
+  display: inline-block;
+  border: none;
+  background: #555;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #666;
+}
+
 .nav .brand a, .nav .brand a:active, .nav .brand a:visited{
   color: #EC8E72;
 }

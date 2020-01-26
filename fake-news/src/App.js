@@ -24,9 +24,9 @@ class App extends Component {
       id: null,  // unique ID for each ticket
       type: null, // type of ticket - can be text, link, or photo. string.
       url: null,  // firebase url for raw actual data
-      data: "Lorem ipsum mixed berry fruit & grain cereal bar",
-      upvotes: 7, // following is scoring metrics for each given ticket
-      downvotes: 3,
+      data: null,
+      upvotes: 0, // following is scoring metrics for each given ticket
+      downvotes: 0,
     },
 
     comments: { // Represents relevant comments to current ticket. Has placeholder numm values
@@ -39,10 +39,25 @@ class App extends Component {
     }
   }
 
+  setTicketData = (data) => {
+    this.setState({
+      currPage: this.state.currPage, // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+
+      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+        id: this.state.id,  // unique ID for each ticket
+        type: this.state.type, // type of ticket - can be text, link, or photo. string.
+        url: this.state.url,  // firebase url for raw actual data
+        data: data,
+        upvotes: this.state.upvotes, // following is scoring metrics for each given ticket
+        downvotes: this.state.downvotes,
+      }
+    })
+  }
+
   togglePageFlag = () => {
     if (this.state.currPage === "Home") {
-      this.setState({ currPage: "Tickets" })
-    } else if (this.state.currPage === "Tickets") {
+      this.setState({ currPage: "Content" })
+    } else if (this.state.currPage === "Content") {
       this.setState({ currPage: "Home" })
     }
   }
@@ -84,11 +99,11 @@ class App extends Component {
   render() {
     let thispage = <Home />
     if (this.state.currPage === "Home") {
-      thispage = <Home />
+      thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
     } else if (this.state.currPage === "Content") {
-      thispage = <Content ticket={this.state.ticket} />
+      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag} />
     }
     return (
       <div className="App">

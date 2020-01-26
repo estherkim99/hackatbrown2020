@@ -5,8 +5,9 @@ class Home extends Component {
         super(props);
         this.state = {
             searchType: 'link',
-            selectedFile: null
+            data: null
         };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     changeHandler = (event) => {
@@ -18,24 +19,45 @@ class Home extends Component {
     onChangeHandler = event => {
         this.setState({
             searchType: 'picture',
-            selectedFile: event.target.files[0],
+            data: event.target.files[0],
             loaded: 0,
         })
 
+    }
+
+    handleChange(event) {
+        this.setState({
+            searchType: this.state.searchType,
+            data: event.target.value
+        });
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.setTicket(this.state.data, this.state.searchType);
+        this.props.setTicketData(this.state.data);
+        // this.props.toggle();
     }
 
     render() {
         let searchBox = '';
         if (this.state.searchType == 'link') {
             searchBox =
-                <div class="paste-link">
-                    <form action="#" method="post">
-                        <textarea placeholder="Paste article link here!" name="article-link"></textarea>
-                        <div>
-                            <button type="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                <form onSubmit={this.onSubmit}>
+                    <input                     
+                        type="text" 
+                        name="title"
+                        style={{ flex: '10', padding: '5px' }}
+                        placeholder="Add Link..."
+                        value={this.state.data}
+                        onChange={this.handleChange.bind(this)}/>
+                    <input 
+                        type="submit" 
+                        value="Submit"
+                        className="btn"
+                        style={{ flex: '1' }}
+                />
+                </form>
 
         } else if (this.state.searchType == 'picture') {
             searchBox = <div><input type="file" name="file" onChange={this.onChangeHandler} />
@@ -43,14 +65,21 @@ class Home extends Component {
 
         } else if (this.state.searchType == "text") {
             searchBox =
-                <div class="paste-article">
-                    <form action="#" method="post">
-                        <textarea placeholder="Paste article text here!" name="article-text"></textarea>
-                        <div>
-                            <button type="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                <form onSubmit={this.onSubmit}>
+                    <input                     
+                        type="text" 
+                        name="title"
+                        style={{ flex: '10', padding: '5px' }}
+                        placeholder="Add Text..."
+                        value={this.state.data}
+                        onChange={this.handleChange.bind(this)}/>
+                    <input 
+                        type="submit" 
+                        value="Submit"
+                        className="btn"
+                        style={{ flex: '1' }}
+                    />
+                </form>
 
         }
         return (
