@@ -11,16 +11,18 @@ class Home extends Component {
     }
 
     changeHandler = (event) => {
-        this.setState({ searchType: event.target.value });
+        this.setState({ 
+            searchType: event.target.value,
+            data: this.state.data
+         });
         // alert("You have selected " + event.target.value);
     }
 
     // handles image upload, logs if triggered
     onChangeHandler = event => {
         this.setState({
-            searchType: 'picture',
-            data: event.target.files[0],
-            loaded: 0,
+            searchType: this.state.searchType,
+            data: event.target.files[0]
         })
 
     }
@@ -35,7 +37,7 @@ class Home extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.setTicket(this.state.data, this.state.searchType);
-        this.props.setTicketData(this.state.data);
+        // this.props.setTicketData(this.state.data);
         // this.props.toggle();
     }
 
@@ -55,13 +57,22 @@ class Home extends Component {
                         type="submit" 
                         value="Submit"
                         className="btn"
-                        style={{ flex: '1' }}
-                />
+                        style={{ flex: '1' }}/>
                 </form>
 
         } else if (this.state.searchType == 'picture') {
-            searchBox = <div><input type="file" name="file" onChange={this.onChangeHandler} />
-            </div>
+            searchBox = 
+            <form onSubmit={this.onSubmit}>
+                <div>
+                    <input type="file" name="file" onChange={this.onChangeHandler} />
+                </div>
+           <input 
+           type="submit" 
+           value="Submit"
+           className="btn"
+           style={{ flex: '1' }}/>
+            </form>
+           
 
         } else if (this.state.searchType == "text") {
             searchBox =
