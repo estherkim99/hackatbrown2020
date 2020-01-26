@@ -22,17 +22,10 @@ class App extends Component {
     currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-<<<<<<< HEAD
-      id: 0,  // unique ID for each ticket
-      type: 'null', // type of ticket - can be text, link, or photo. string.
-      data: 'null',  // firebase url for raw actual data
-
-=======
       id: null,  // unique ID for each ticket
       type: null, // type of ticket - can be text, link, or photo. string.
       url: null,  // firebase url for raw actual data
       data: null,
->>>>>>> ab6fe28c3c488b042aa6acfe1c62e7fe49b43602
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
     },
@@ -74,15 +67,9 @@ class App extends Component {
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
     const snapshot = db.collection("ticket").where("data", "==", data).get();
-<<<<<<< HEAD
     if(snapshot.empty){
       return 0;
     }
-=======
-      if(snapshot.empty){
-        return 0;
-      }
->>>>>>> ab6fe28c3c488b042aa6acfe1c62e7fe49b43602
     else{
       docSnapshots = snapshot.docs;
       const doc = docSnapshots[0].data();
