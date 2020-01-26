@@ -111,6 +111,10 @@ class Content extends Component {
                     </div>
 
                     <div>
+                        <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
+                    </div>
+
+                    <div>
                         <h2>Comments</h2>
                         <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
@@ -129,9 +133,6 @@ class Content extends Component {
                                     style={{ flex: '1' }}
                                 />
                             </form>
-                            <div>
-                                <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
-                            </div>
                             {/* <form action="#" method="post">
                                 <textarea placeholder="What are your thoughts about this article?" name="comment"></textarea>
                                 <div>
