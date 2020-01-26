@@ -17,7 +17,7 @@ firebase.initializeApp({
   appId: "1:557519037753:web:fc75a0f0c2b455713534e8",
   measurementId: "G-XVE5XLSR39"
 });
-var db = firebase.firestore();
+var db = firebase().firestore();
 // import {
 //   Router, Route, Link
 // } from 'react-router-dom'
