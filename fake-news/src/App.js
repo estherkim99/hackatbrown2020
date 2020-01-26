@@ -109,11 +109,21 @@ class App extends Component {
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
     }
+    // const snapshot = db.collection("ticket").where("data", "==", data).get();
+    // if(snapshot.empty){
+    //   return 0;
+    // }
+    // else{
+    //   // docSnapshots = snapshot.docs;
+    //   // const doc = docSnapshots[0].data();
+    //   // return doc.id;
+    // }
+  }
 
     // switch to content page once data and state has been set
     // this.togglePageFlag();
-  }
-  
+  // }
+
     // function to increase ticket upvote state field by 1
   plusUpScore = () => {
     this.setState({
