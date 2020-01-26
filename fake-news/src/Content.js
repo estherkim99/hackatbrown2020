@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import c from "classnames";
+import uuid from 'uuid';
+import Comments from './components/Comments.js'
 
 class Content extends Component {
 
@@ -7,7 +9,16 @@ class Content extends Component {
         upvotes: this.props.ticket.upvotes,
         downvotes: this.props.ticket.downvotes,
         downvoteActive: false,
-        upvoteActive: false
+        upvoteActive: false,
+        commentInput: null,
+        comments: [
+            // {
+            //     commentId: null,
+            //     ticketId: null,
+            //     // creator: null,
+            //     contentText: null
+            // }
+        ]
     }
 
     setDownvote() {
@@ -50,6 +61,25 @@ class Content extends Component {
         this.setUpvote();
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        const newComment = {
+            commentId: uuid.v4(),
+            ticketId: this.props.ticket.id,
+            commentInput: this.state.commentInput
+        }
+        this.setState({
+            comments: [...this.state.comments, newComment]
+        })
+        // add comment
+    }
+
+    onChange = (e) => {
+        this.setState({
+            commentInput: e.target.value
+        })
+    }
+
     render() {
         return (
             <div class="content-container">
@@ -82,12 +112,29 @@ class Content extends Component {
                     <div>
                         <h2>Comments</h2>
                         <div class="comment">
-                            <form action="#" method="post">
+                            <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
+                                <input 
+                                    type="text" 
+                                    name="title"
+                                    style={{ flex: '10', padding: '5px' }}
+                                    placeholder="Add comment..."
+                                    value={this.state.commentInput}
+                                    onChange={this.onChange}
+                                /> 
+                                <input 
+                                    type="submit" 
+                                    value="Submit"
+                                    className="btn"
+                                    style={{ flex: '1' }}
+                                />
+                            </form>
+                            <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
+                            {/* <form action="#" method="post">
                                 <textarea placeholder="What are your thoughts about this article?" name="comment"></textarea>
                                 <div>
                                     <button type="submit">Submit</button>
                                 </div>
-                            </form>
+                            </form> */}
                         </div>
                     </div>
                 </section>
