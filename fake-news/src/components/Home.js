@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Upload from './upload/Upload'
 
 class Home extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class Home extends Component {
             searchBox = <p>Paste link to article</p>
 
         } else if (this.state.searchType === 'screenshot') {
-            searchBox = <p>Upload image</p >
+            searchBox = <Upload />
         } else if (this.state.searchType === "text") {
             searchBox = <p>Paste article text</p>
 
