@@ -110,7 +110,6 @@ class App extends Component {
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
     }
-=======
     // const snapshot = db.collection("ticket").where("data", "==", data).get();
     // if(snapshot.empty){
     //   return 0;
@@ -174,7 +173,6 @@ class App extends Component {
       }
     })
   }
->>>>>>> 656d6071a51617c48cde2665aa61897bcf1d4f5b
 
   // function to increase downvote by 1
   plusDownScore = () => {
