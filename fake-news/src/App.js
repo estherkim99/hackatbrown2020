@@ -92,19 +92,19 @@ class App extends Component {
           }
         }
       )
-      // upload new ticket to firebase 
+      // upload new ticket to firebase
       db.collection("ticket").doc(data).add(this.ticket);
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
       db.collection("ticket")
-      .doc(ret)
-      .get()
-      .then(documentSnapshot => {
-        this.type = documentSnapshot.get("type");
-        this.data = documentSnapshot.get("data");
-        this.upvotes = documentSnapshot.get("upvotes");
-        this.downvotes = documentSnapshot.get("downvotes");
-      });
+        .doc(ret)
+        .get()
+        .then(documentSnapshot => {
+          this.type = documentSnapshot.get("type");
+          this.data = documentSnapshot.get("data");
+          this.upvotes = documentSnapshot.get("upvotes");
+          this.downvotes = documentSnapshot.get("downvotes");
+        });
     }
   }
 
@@ -114,7 +114,7 @@ class App extends Component {
     // go through database, check for a hit on all tickets for matching data and data
     const ret = this.checkTicket(data, type);
     // if miss, make new local ticket
-    if(ret === 0){
+    if (ret === 0) {
       this.setState(  // set local state to that of new ticket
         {
           currPage: this.state.currPage,
@@ -126,7 +126,7 @@ class App extends Component {
           }
         }
       )
-      // upload new ticket to firebase 
+      // upload new ticket to firebase
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
     }
@@ -184,19 +184,29 @@ class App extends Component {
     })
   }
 
+  handleHome = () => {
+    this.setState({ currPage: "Home" })
+    window.location.reload(false);
+  }
+
   render() {
     let thispage = <Home />
-    if (this.state.currPage === "Home") {
+    if (this.state.currPage == "Home") {
       thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
-    } else if (this.state.currPage === "Tickets") {
+    } else if (this.state.currPage == "Tickets") {
       thispage = <Tickets />
-    } else if (this.state.currPage === "Content") {
+    } else if (this.state.currPage == "Content") {
       thispage = <Content minusDown={this.minusDownScore} minusUp={this.minusUpScore} plusDown={this.plusDownScore} plusUp={this.plusUpScore} ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     }
     return (
       <div className="App">
         <header className="App-header">
-          <Header />
+          <nav fixed="top" class="nav">
+            <ul>
+              <li class="brand"><a href="" onClick={this.handleHome}>VERA</a></li>
+              <li>How to Use</li>
+            </ul>
+          </nav>
           {thispage}
         </header>
       </div>
