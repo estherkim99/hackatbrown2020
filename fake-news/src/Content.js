@@ -20,12 +20,10 @@ class Content extends Component {
     }
 
     getFromContext = () => {
-        return (<Entry.Consumer>
-            {set => {
-                this.state.contents.push(set.data);
-                this.state.text = set.data;
-            }}
-        </Entry.Consumer>)
+        if (window.$requested) {
+            this.state.contents.push(window.$textStore);
+            window.$requested = false;
+        }
     }
 
     // setDownvote() {
@@ -89,16 +87,16 @@ class Content extends Component {
 
     render() {
 
-        if (this.state.text == null) {
-            alert("empty");
-        }
+        // if (this.state.text == null) {
+        //     alert("empty");
+        // }
         this.getFromContext();
-        if (this.state.contents[0] == null) {
-            alert("empty array");
-        }
-        if (this.state.text == null) {
-            alert("empty");
-        }
+        // if (this.state.contents[0] == null) {
+        //     alert("empty array");
+        // }
+        // if (this.state.text == null) {
+        //     alert("empty");
+        // }
         return (
             <div class="content-container">
                 {/* <section class="content-display">
@@ -127,7 +125,7 @@ class Content extends Component {
                             </button> */}
                         </div>
                         <h2>Comments</h2>
-                        <p>{this.state.text}</p>
+                        <p>{window.$storedTexts}</p>
                         {/* <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
                                 <input

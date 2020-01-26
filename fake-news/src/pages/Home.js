@@ -32,20 +32,15 @@ class Home extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
         this.props.history.push('/articles');
         const val = {
-            submitterName: "Guest",
-            dataType: this.state.searchType,
-            data: this.state.data,
-            upvotes: 0,
-            downvotes: 0,
-            comments: [],
-            id: Entry.id + 1
+            user: 'Guest',
+            mediaType: this.state.searchType,
+            text: this.state.data,
+            upvote: 0,
+            downvote: 0
         }
-        return (<Entry.Provider value={val}>
-            <Content />
-        </Entry.Provider >)
+        window.$storedTexts.push(val);
     }
     render() {
         let searchBox = '';

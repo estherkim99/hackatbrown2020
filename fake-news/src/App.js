@@ -10,8 +10,10 @@ import {
   withRouter
 } from "react-router-dom";
 
+window.$storedTexts = [];
 
 class App extends Component {
+
   // setEntry = (name, data) => {
   //   this.setState({
   //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
