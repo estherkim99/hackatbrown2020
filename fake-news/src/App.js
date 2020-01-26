@@ -19,7 +19,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       id: null,  // unique ID for each ticket
@@ -61,7 +61,7 @@ class App extends Component {
       this.setState({ currPage: "Home" })
     }
   }
-  
+
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
@@ -95,7 +95,7 @@ class App extends Component {
   //         }
   //       }
   //     )
-  //     // upload new ticket to firebase 
+  //     // upload new ticket to firebase
   //   } else {  // when we get a hit
   //     // copy over data from firebase ticket to local ticket state
   //   }

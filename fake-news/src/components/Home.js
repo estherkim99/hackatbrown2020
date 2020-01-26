@@ -11,10 +11,10 @@ class Home extends Component {
     }
 
     changeHandler = (event) => {
-        this.setState({ 
+        this.setState({
             searchType: event.target.value,
             data: this.state.data
-         });
+        });
         // alert("You have selected " + event.target.value);
     }
 
@@ -46,46 +46,48 @@ class Home extends Component {
         if (this.state.searchType === 'link') {
             searchBox =
                 <form onSubmit={this.onSubmit}>
-                    <input                     
-                        type="text" 
+                    <input
+                        class="text-input paste-link"
+                        type="text"
                         name="title"
                         style={{ flex: '10', padding: '5px' }}
                         placeholder="Add Link..."
                         value={this.state.data}
-                        onChange={this.handleChange.bind(this)}/>
-                    <input 
-                        type="submit" 
+                        onChange={this.handleChange.bind(this)} /><br />
+                    <input
+                        type="submit"
                         value="Submit"
                         className="btn"
-                        style={{ flex: '1' }}/>
+                        style={{ flex: '1' }} />
                 </form>
 
         } else if (this.state.searchType === 'picture') {
-            searchBox = 
-            <form onSubmit={this.onSubmit}>
-                <div>
-                    <input type="file" name="file" onChange={this.onChangeHandler} />
-                </div>
-           <input 
-           type="submit" 
-           value="Submit"
-           className="btn"
-           style={{ flex: '1' }}/>
-            </form>
-           
+            searchBox =
+                <form onSubmit={this.onSubmit}>
+                    <div>
+                        <input type="file" name="file" onChange={this.onChangeHandler} />
+                    </div>
+                    <input
+                        type="submit"
+                        value="Submit"
+                        className="btn"
+                        style={{ flex: '1' }} />
+                </form>
+
 
         } else if (this.state.searchType === "text") {
             searchBox =
                 <form onSubmit={this.onSubmit}>
-                    <input                     
-                        type="text" 
+                    <textarea
+                        class="text-input paste-article"
+                        type="text"
                         name="title"
-                        style={{ flex: '10', padding: '5px' }}
                         placeholder="Add Text..."
                         value={this.state.data}
-                        onChange={this.handleChange.bind(this)}/>
-                    <input 
-                        type="submit" 
+                        onChange={this.handleChange.bind(this)} />
+                    <br />
+                    <input
+                        type="submit"
                         value="Submit"
                         className="btn"
                         style={{ flex: '1' }}
