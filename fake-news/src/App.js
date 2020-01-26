@@ -29,7 +29,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       id: null,  // unique ID for each ticket
