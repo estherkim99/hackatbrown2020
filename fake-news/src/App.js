@@ -71,9 +71,10 @@ class App extends Component {
       this.setState({ currPage: "Home" })
     }
   }
-  
+
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
+<<<<<<< HEAD
   // checkTicket = (data, type) => {
   //   // const snapshot = db.collection("ticket").where("data", "==", data).get();
   //   if(snapshot.empty){
@@ -85,6 +86,19 @@ class App extends Component {
   //     return doc.id;
   //   }
   // }
+=======
+  checkTicket = (data, type) => {
+    const snapshot = db.collection("ticket").where("data", "==", data).get();
+    if (snapshot.empty) {
+      return 0;
+    }
+    else {
+      const docSnapshots = snapshot.docs;
+      const doc = docSnapshots[0].data();
+      return doc.id;
+    }
+  }
+>>>>>>> 8c113578fb5fb5aec1f0ba1e01525a166557a2a3
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {
@@ -92,7 +106,7 @@ class App extends Component {
     // go through database, check for a hit on all tickets for matching data and data
     const ret = this.checkTicket(data, type);
     // if miss, make new local ticket
-    if(ret === 0){
+    if (ret === 0) {
       this.setState(  // set local state to that of new ticket
         {
           currPage: this.state.currPage,
@@ -105,7 +119,7 @@ class App extends Component {
           }
         }
       )
-      // upload new ticket to firebase 
+      // upload new ticket to firebase
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
     }
@@ -120,11 +134,37 @@ class App extends Component {
     // }
   }
 
-    // switch to content page once data and state has been set
-    // this.togglePageFlag();
+  // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
+  // setTicket = (data, type) => {
+
+  //   // go through database, check for a hit on all tickets for matching data and data
+  //   const ret = checkTicket(data, type);
+  //   // if miss, make new local ticket
+  //   if(ret === 0){
+  //     this.setState(  // set local state to that of new ticket
+  //       {
+  //         currPage: this.state.currPage,
+  //         ticket: {
+  //           id: uuid.v4(),  // unique ID for each ticket
+  //           type: type, // type of ticket - can be text, link, or photo. string.
+  //           data: data,  // actual data
+  //           upvotes: 0, // following is scoring metrics for each given ticket
+  //           downvotes: 0,
+  //         }
+  //       }
+  //     )
+  //     // upload new ticket to firebase
+  //   } else {  // when we get a hit
+  //     // copy over data from firebase ticket to local ticket state
+  //   }
+
+  //   // switch to content page once data and state has been set
+  //   this.togglePageFlag();
+  // switch to content page once data and state has been set
+  // this.togglePageFlag();
   // }
 
-    // function to increase ticket upvote state field by 1
+  // function to increase ticket upvote state field by 1
   plusUpScore = () => {
     this.setState({
       ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.

@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Staatliches&display=swap');
+
+* {
+font-family: 'Lato', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 800;
+}
+
 .App {
   text-align: center;
 }
@@ -29,6 +40,7 @@
   }
 }
 
+/* NAVBAR */
 .nav {
   background-color: #271828;
   color: #B895AF;
@@ -36,6 +48,20 @@
   top: 0;
   position: fixed;
   text-align: left;
+}
+
+.nav .brand a, .nav .brand a:active, .nav .brand a:visited{
+  color: #EC8E72;
+}
+
+.nav li{
+  font-family: 'Staatliches', cursive;
+  list-style: none;
+  display: inline-block;
+  font-size: 0.8em;
+  padding: 0em 1em;
+  vertical-align: middle;
+  transform: translateY(-30%);
 }
 
 .btn {
@@ -51,10 +77,6 @@
   background: #666;
 }
 
-.nav .brand a, .nav .brand a:active, .nav .brand a:visited{
-  color: #EC8E72;
-}
-
 .descript {
   color: #B895AF;
   font-size: 0.75em;
@@ -62,19 +84,8 @@
   padding: 5em 18em;
 }
 
-a {
-  text-decoration: none;
-  font-weight: 800;
-}
 
-.nav li{
-  list-style: none;
-  display: inline-block;
-  font-size: 0.8em;
-  padding: 0em 1em;
-  vertical-align: middle;
-  transform: translateY(-30%);
-}
+/* CONTENT ANALYSIS */
 
 .content-container{
   position: absolute;
@@ -131,9 +142,9 @@ width: 100%;
   width: 100%;
 }
 
-textarea {
+.text-input {
   color: #271828;
-  font-weight: 700;
+  font-weight: 500;
   padding: 10px;
   font-size: medium;
   background-color: #F5F9F3;
@@ -141,13 +152,14 @@ textarea {
   margin: 20px;
 }
 
-.paste-article textarea {
+.paste-article {
 height: 15em;
+max-height: 15em;
 }
-.paste-link textarea {
+.paste-link {
 height: 1em;
+max-height: 1em;
 }
-
 
 
 .Card {
@@ -160,3 +172,24 @@ height: 1em;
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
+
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+ }
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+ }
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+ }
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+ }
