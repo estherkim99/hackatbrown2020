@@ -47,10 +47,15 @@ class App extends Component {
     }
   }
 
+  // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
+  // checkTicket = (data, type) => {  
+  // }
+
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {
 
     // check to see if we have matching entry in database
+    // const ret = checkTicket(data, type)
 
     // if so, we set ticket to match that entry's data, pulling data from firebasee
 

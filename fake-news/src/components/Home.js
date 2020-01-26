@@ -16,12 +16,12 @@ class Home extends Component {
 
     render() {
         let searchBox = '';
-        if (this.state.searchType == 'link') {
+        if (this.state.searchType === 'link') {
             searchBox = <p>Paste link to article</p>
 
-        } else if (this.state.searchType == 'screenshot') {
+        } else if (this.state.searchType === 'screenshot') {
             searchBox = <p>Upload image</p >
-        } else if (this.state.searchType == "text") {
+        } else if (this.state.searchType === "text") {
             searchBox = <p>Paste article text</p>
 
         }
