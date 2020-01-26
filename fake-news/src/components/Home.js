@@ -17,6 +17,7 @@ class Home extends Component {
     // handles image upload, logs if triggered
     onChangeHandler=event=>{
       this.setState({
+        searchType: 'picture',
         selectedFile: event.target.files[0],
         loaded: 0,
       })
@@ -28,11 +29,11 @@ class Home extends Component {
         if (this.state.searchType === 'link') {
           searchBox = <p>Paste link to article</p>
 
-        } else if (this.state.searchType === 'screenshot') {
-            searchBox =  <input type="file" name="file" onChange={this.onChangeHandler}/>
+        } else if (this.state.searchType === 'picture') {
+          searchBox =  <input type="file" name="file" onChange={this.onChangeHandler}/>
         
-          } else if (this.state.searchType === "text") {
-            searchBox = <p>Paste article text</p>
+        } else if (this.state.searchType === "text") {
+          searchBox = <p>Paste article text</p>
 
         }
 
@@ -44,7 +45,7 @@ class Home extends Component {
                 </div>
                 <select value={this.state.searchType} onChange={this.changeHandler}>
                     <option value='link'>link</option>
-                    <option value='screenshot'>screenshot</option>
+                    <option value='picture'>picture</option>
                     <option value='text'>text</option>
                 </select>
                 {searchBox}
