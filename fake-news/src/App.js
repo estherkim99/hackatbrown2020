@@ -11,8 +11,8 @@ import uuid from 'uuid';
 
 class App extends Component {
 
-  // const db = firebase.database();
-  // const dbRef = db.ref().child('data');
+  const db = firebase.database();
+  const dbRef = db.ref().child('data');
 
   // set up way to switch between home and tickets pages
 
@@ -49,11 +49,16 @@ class App extends Component {
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {  
-    
+
   }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {
+
+    if (type === 'text') {
+      // go through database, check for a hit on all tickets for matching data and data
+      firebase.database.ref("ticket"). //  TODO
+    }
 
     // check to see if we have matching entry in database
     // const ret = checkTicket(data, type)
