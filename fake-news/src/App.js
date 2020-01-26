@@ -74,31 +74,17 @@ class App extends Component {
 
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-<<<<<<< HEAD
   // checkTicket = (data, type) => {
-  //   // const snapshot = db.collection("ticket").where("data", "==", data).get();
-  //   if(snapshot.empty){
+  //   const snapshot = db.collection("ticket").where("data", "==", data).get();
+  //   if (snapshot.empty) {
   //     return 0;
   //   }
-  //   else{
+  //   else {
   //     const docSnapshots = snapshot.docs;
   //     const doc = docSnapshots[0].data();
   //     return doc.id;
   //   }
   // }
-=======
-  checkTicket = (data, type) => {
-    const snapshot = db.collection("ticket").where("data", "==", data).get();
-    if (snapshot.empty) {
-      return 0;
-    }
-    else {
-      const docSnapshots = snapshot.docs;
-      const doc = docSnapshots[0].data();
-      return doc.id;
-    }
-  }
->>>>>>> 8c113578fb5fb5aec1f0ba1e01525a166557a2a3
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {

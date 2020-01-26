@@ -69,7 +69,8 @@ class Content extends Component {
             commentInput: this.state.commentInput
         }
         this.setState({
-            comments: [...this.state.comments, newComment]
+            comments: [...this.state.comments, newComment],
+            commentInput: ''
         })
         // add comment
     }
@@ -128,7 +129,9 @@ class Content extends Component {
                                     style={{ flex: '1' }}
                                 />
                             </form>
-                            <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
+                            <div>
+                                <Comments comments={this.state.comments} commentInput={this.state.commentInput}/>
+                            </div>
                             {/* <form action="#" method="post">
                                 <textarea placeholder="What are your thoughts about this article?" name="comment"></textarea>
                                 <div>
