@@ -29,7 +29,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       type: null, // type of ticket - can be text, link, or photo. string.
@@ -63,16 +63,17 @@ class App extends Component {
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
-    const snapshot = db.collection("ticket").where("data", "==", data).get();
-    console.log(snapshot.empty);
-    if (snapshot.empty === true) {
-      return 0;
-    }
-    else {
-      const docSnapshots = snapshot.docs;
-      const docRef = docSnapshots[0].ref();
-      return docRef.id;
-    }
+  db.collection("ticket").where("data", "==", data).get().then(snapshot => {
+      console.log(snapshot);
+      if (snapshot.empty === true) {
+        return 0;
+      }
+      else {
+        const docSnapshots = snapshot.docs;
+        const docRef = docSnapshots[0].ref();
+        return docRef.id;
+      }
+    });
   }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
@@ -80,6 +81,8 @@ class App extends Component {
 
     // go through database, check for a hit on all tickets for matching data and data
     const ret = this.checkTicket(data, type);
+    return;
+
     // if miss, make new local ticket
     if (ret === 0) {
       this.setState(  // set local state to that of new ticket
