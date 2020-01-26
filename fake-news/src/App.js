@@ -112,11 +112,15 @@ class App extends Component {
               downvotes: 0,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               docId: docRef.id
 =======
               docId: docRef.ids,
               id: this.state.id
 >>>>>>> 42a27f6ddc8955c4a1ef57ff3df3646a128e4fa0
+=======
+              docId: docRef.ids
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
 =======
               docId: docRef.ids
 >>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
@@ -154,6 +158,7 @@ class App extends Component {
    //  const promise = this.checkTicket(data);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
    const promise = db.collection("ticket").doc(this.state.docId);
    promise.then(docRef => {docRef.update(this.state.ticket);
   });
@@ -170,6 +175,8 @@ class App extends Component {
     //       return docSnapshots[0].ref.id;
     //     }
     //   });
+=======
+>>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
 =======
 >>>>>>> parent of 42a27f6... Merge branch 'web-app' of https://github.com/estherkim99/hackatbrown2020 into web-app
   }
