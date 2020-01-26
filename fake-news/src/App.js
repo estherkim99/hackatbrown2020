@@ -109,33 +109,6 @@ class App extends Component {
     }
   }
 
-  // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
-  setTicket = (data, type) => {
-
-    // go through database, check for a hit on all tickets for matching data and data
-    const ret = this.checkTicket(data, type);
-    // if miss, make new local ticket
-    if (ret === 0) {
-      this.setState(  // set local state to that of new ticket
-        {
-          currPage: this.state.currPage,
-          ticket: {
-            type: type, // type of ticket - can be text, link, or photo. string.
-            data: data,  // actual data
-            upvotes: 0, // following is scoring metrics for each given ticket
-            downvotes: 0,
-          }
-        }
-      )
-      // upload new ticket to firebase
-    } else {  // when we get a hit
-      // copy over data from firebase ticket to local ticket state
-    }
-
-    // switch to content page once data and state has been set
-    this.togglePageFlag();
-  }
-
   // function to increase ticket upvote state field by 1
   plusUpScore = () => {
     this.setState({
@@ -192,11 +165,11 @@ class App extends Component {
 
   render() {
     let thispage = <Home />
-    if (this.state.currPage == "Home") {
+    if (this.state.currPage === "Home") {
       thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
-    } else if (this.state.currPage == "Tickets") {
+    } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
-    } else if (this.state.currPage == "Content") {
+    } else if (this.state.currPage === "Content") {
       thispage = <Content minusDown={this.minusDownScore} minusUp={this.minusUpScore} plusDown={this.plusDownScore} plusUp={this.plusUpScore} ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     }
     return (

@@ -105,6 +105,7 @@ button {
   bottom: 0;
 }
 
+
 .content-display, .content-analysis {
   display: inline-block;
   margin: 0% 1%;
@@ -115,14 +116,23 @@ button {
   overflow: scroll;
   text-align: left;
 }
-
 .content-display p,  .content-analysis p{
-  width: 100%;
+  width: 92%;
   font-size: 0.5em;
+  padding: 0px 20px;
+}
+
+.content-analysis button {
+  width: 100px;
+  padding: 10px 0px;
+  margin: 0px 20px;
+
+
 }
 
 .content-display p {
   left: 0px;
+  font-size: medium;
 }
 .content-analysis p{
   right: 0px;
@@ -130,16 +140,13 @@ button {
 
 .content-analysis h2 {
   font-size: 1em;
+  padding: 0 20px;
 }
 .content-analysis h3 {
-  font-size: 0.75em;
+  font-size: 0.7em;
+  padding: 0px 20px;
 }
 
-.content-analysis div {
-  height: 35%;
-  padding: 5%;
-  overflow: scroll;
-}
 
 .paste-article {
 width: 100%;
@@ -147,6 +154,11 @@ width: 100%;
 
 .comment {
   padding: 0px !important;
+}
+
+.comment-entry {
+  height: 1em;
+
 }
 
 .comment textarea {
@@ -173,7 +185,7 @@ max-height: 1em;
 }
 
 
-.Card {
+/* .Card {
   background-color: white;
   padding: 32px;
   width: 50%;
@@ -182,7 +194,7 @@ max-height: 1em;
   justify-content: flex-start;
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
-}
+} */
 
 
 /* Large desktop */

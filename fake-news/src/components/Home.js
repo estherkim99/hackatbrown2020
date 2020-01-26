@@ -64,7 +64,7 @@ class Home extends Component {
         } else if (this.state.searchType === 'picture') {
             searchBox =
                 <form onSubmit={this.onSubmit}>
-                        <input type="file" name="file" onChange={this.onChangeHandler} />
+                    <input type="file" name="file" onChange={this.onChangeHandler} />
                     <input
                         type="submit"
                         value="Submit"
@@ -98,8 +98,8 @@ class Home extends Component {
                 <div>
 
                 </div>
-                 <div>
-                    
+                <div>
+
                 </div>
                 <div class="descript">
                     <hl>We are the first crowdsourced platform on the internet harnessing the power of the public to verify the truthfulness of forwarded messages and media.<br /><br />
