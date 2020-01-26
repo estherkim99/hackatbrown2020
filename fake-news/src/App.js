@@ -33,19 +33,10 @@ class App extends Component {
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       type: null, // type of ticket - can be text, link, or photo. string.
-      data: null,
+      data: "This program is intended primarily for freshmen and sophomores. If selected, you will be matched with an upperclassman who will be your mentor through the recruiting season to help guide you through resume reviews, networking, and interview preparation. Our mentors are experienced juniors or seniors who have successfully landed or completed internships at major investment banks (GS, PWP, etc.) or investment firms. You will also have access to further opportunities with firms coming to campus including resume books and smaller networking sessions. ",
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
-    },
-
-    // comments: { // Represents relevant comments to current ticket. Has placeholder numm values
-    //   1: {
-    //     commentId: null,
-    //     ticketId: null,
-    //     creator: null,
-    //     contentText: null
-    //   }
-    // }
+    }
   }
 
   setTicketData = (data) => {
@@ -73,7 +64,8 @@ class App extends Component {
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
     const snapshot = db.collection("ticket").where("data", "==", data).get();
-    if (snapshot.empty) {
+    console.log(snapshot.empty);
+    if (snapshot.empty === true) {
       return 0;
     }
     else {
@@ -101,19 +93,19 @@ class App extends Component {
           }
         }
       )
-      // upload new ticket to firebase 
+      // upload new ticket to firebase
       db.collection("ticket").doc(data).add(this.ticket);
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
       db.collection("ticket")
-      .doc(ret)
-      .get()
-      .then(documentSnapshot => {
-        this.type = documentSnapshot.get("type");
-        this.data = documentSnapshot.get("data");
-        this.upvotes = documentSnapshot.get("upvotes");
-        this.downvotes = documentSnapshot.get("downvotes");
-      });
+        .doc(ret)
+        .get()
+        .then(documentSnapshot => {
+          this.type = documentSnapshot.get("type");
+          this.data = documentSnapshot.get("data");
+          this.upvotes = documentSnapshot.get("upvotes");
+          this.downvotes = documentSnapshot.get("downvotes");
+        });
     }
   }
 
@@ -123,7 +115,7 @@ class App extends Component {
     // go through database, check for a hit on all tickets for matching data and data
     const ret = this.checkTicket(data, type);
     // if miss, make new local ticket
-    if(ret === 0){
+    if (ret === 0) {
       this.setState(  // set local state to that of new ticket
         {
           currPage: this.state.currPage,
@@ -135,7 +127,7 @@ class App extends Component {
           }
         }
       )
-      // upload new ticket to firebase 
+      // upload new ticket to firebase
     } else {  // when we get a hit
       // copy over data from firebase ticket to local ticket state
     }
@@ -193,19 +185,29 @@ class App extends Component {
     })
   }
 
+  handleHome = () => {
+    this.setState({ currPage: "Home" })
+    window.location.reload(false);
+  }
+
   render() {
     let thispage = <Home />
-    if (this.state.currPage === "Home") {
+    if (this.state.currPage == "Home") {
       thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
-    } else if (this.state.currPage === "Tickets") {
+    } else if (this.state.currPage == "Tickets") {
       thispage = <Tickets />
-    } else if (this.state.currPage === "Content") {
+    } else if (this.state.currPage == "Content") {
       thispage = <Content minusDown={this.minusDownScore} minusUp={this.minusUpScore} plusDown={this.plusDownScore} plusUp={this.plusUpScore} ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     }
     return (
       <div className="App">
         <header className="App-header">
-          <Header />
+          <nav fixed="top" class="nav">
+            <ul>
+              <li class="brand"><a href="" onClick={this.handleHome}>VERA</a></li>
+              <li>How to Use</li>
+            </ul>
+          </nav>
           {thispage}
         </header>
       </div>

@@ -6,7 +6,7 @@ class Header extends Component {
             <nav fixed="top" class="nav">
                 <ul>
                     <li class="brand"><a href="#home">VERA</a></li>
-                    <li>How to Use</li>
+                    <li>About</li>
                 </ul>
             </nav>
         );
