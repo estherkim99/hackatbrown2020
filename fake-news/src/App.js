@@ -110,7 +110,7 @@ class App extends Component {
               data: data,  // actual data
               upvotes: 0, // following is scoring metrics for each given ticket
               downvotes: 0,
-              docId: docRef.id
+              docId: docRef.ids
             }
           }
         );
@@ -143,9 +143,7 @@ class App extends Component {
     // checkTicket will eturn a promise that is ultimately refid
     // go through database, check for a hit on all tickets for matching data and data
    //  const promise = this.checkTicket(data);
-   const promise = db.collection("ticket").doc(this.state.docId);
-   promise.then(docRef => {docRef.update(this.state.ticket);
-  });
+  }
 
   // function to increase ticket upvote state field by 1
   plusUpScore = () => {
