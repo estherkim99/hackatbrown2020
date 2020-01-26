@@ -1,28 +1,48 @@
 import React, { Component } from 'react'
-import Upload from './upload/Upload'
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchType: 'link',
+            searchType: 'null',
+            selectedFile: null
         };
     }
 
     changeHandler = (event) => {
         this.setState({ searchType: event.target.value });
         // alert("You have selected " + event.target.value);
+    }
+
+    // handles image upload, logs if triggered
+    onChangeHandler=event=>{
+      this.setState({
+        selectedFile: event.target.files[0],
+        loaded: 0,
+      })
 
     }
 
     render() {
         let searchBox = '';
         if (this.state.searchType === 'link') {
-            searchBox = <p>Paste link to article</p>
+          this.setState({
+            searchType: 'link',
+            selectedFile: null
+          })
+          searchBox = <p>Paste link to article</p>
 
         } else if (this.state.searchType === 'screenshot') {
-            searchBox = <Upload />
+          this.setState({
+            searchType: 'screenshot',
+            selectedFile: null
+          })
+            searchBox =  <input type="file" name="file" onChange={this.onChangeHandler}/>
         } else if (this.state.searchType === "text") {
+          this.setState({
+            searchType: 'text',
+            selectedFile: null
+          })
             searchBox = <p>Paste article text</p>
 
         }

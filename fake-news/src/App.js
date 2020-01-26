@@ -48,8 +48,9 @@ class App extends Component {
   }
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-  // checkTicket = (data, type) => {  
-  // }
+  checkTicket = (data, type) => {  
+    
+  }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
   setTicket = (data, type) => {
