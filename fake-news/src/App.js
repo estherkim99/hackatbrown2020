@@ -1,189 +1,131 @@
-import React, { Component } from 'react';
-import Tickets from './components/Tickets.js';
-import Home from './components/Home.js';
-import Header from './components/layout/Header.js';
-import './App.css';
-import uuid from 'uuid';
-import Content from './Content.js';
-const firebase = require("firebase");
-require("firebase/firestore");
-firebase.initializeApp({
-  apiKey: "AIzaSyDa9hWI4iSClSsxd1kWXlrvmVyc7CptPyg",
-  authDomain: "hab2020-twdbeproud.firebaseapp.com",
-  databaseURL: "https://hab2020-twdbeproud.firebaseio.com",
-  projectId: "hab2020-twdbeproud",
-  storageBucket: "hab2020-twdbeproud.appspot.com",
-  messagingSenderId: "557519037753",
-  appId: "1:557519037753:web:fc75a0f0c2b455713534e8",
-  measurementId: "G-XVE5XLSR39"
-});
-var db = firebase.firestore();
-// import {
-//   Router, Route, Link
-// } from 'react-router-dom'
+import React, { Component } from "react";
+import Home from "./pages/Home.js";
+import Content from "./Content.js"
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
+
 
 class App extends Component {
-
-  // const dbRef = db.ref().child('data');
-
-  // set up way to switch between home and tickets pages
-
-  state = {
-    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
-
-    ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-      type: null, // type of ticket - can be text, link, or photo. string.
-      data: "This program is intended primarily for freshmen and sophomores. If selected, you will be matched with an upperclassman who will be your mentor through the recruiting season to help guide you through resume reviews, networking, and interview preparation. Our mentors are experienced juniors or seniors who have successfully landed or completed internships at major investment banks (GS, PWP, etc.) or investment firms. You will also have access to further opportunities with firms coming to campus including resume books and smaller networking sessions. ",
-      upvotes: 0, // following is scoring metrics for each given ticket
-      downvotes: 0,
-    }
-  }
-
-  setTicketData = (data) => {
-    this.setState({
-      currPage: this.state.currPage, // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
-
-      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-        type: this.state.type, // type of ticket - can be text, link, or photo. string.
-        data: data,
-        upvotes: this.state.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.downvotes,
-      }
-    })
-  }
-
-  togglePageFlag = () => {
-    if (this.state.currPage === "Home") {
-      this.setState({ currPage: "Content" })
-    } else if (this.state.currPage === "Content") {
-      this.setState({ currPage: "Home" })
-    }
-  }
+  // setEntry = (name, data) => {
+  //   this.setState({
+  //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+  //       type: this.state.type, // type of ticket - can be text, link, or photo. string.
+  //       data: data,
+  //       upvotes: this.state.upvotes, // following is scoring metrics for each given ticket
+  //       downvotes: this.state.downvotes,
+  //     }
+  //   })
+  // }
 
 
-  // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
-  checkTicket = (data, type) => {
-    const snapshot = db.collection("ticket").where("data", "==", data).get();
-    console.log(snapshot.empty);
-    if (snapshot.empty === true) {
-      return 0;
-    }
-    else {
-      const docSnapshots = snapshot.docs;
-      const docRef = docSnapshots[0].ref();
-      return docRef.id;
-    }
-  }
+  // // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
+  // setTicket = (data, type) => {
 
-  // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
-  setTicket = (data, type) => {
+  //   // go through database, check for a hit on all tickets for matching data and data
+  //   const ret = this.checkTicket(data, type);
+  //   // if miss, make new local ticket
+  //   if (ret === 0) {
+  //     this.setState(  // set local state to that of new ticket
+  //       {
+  //         currPage: this.state.currPage,
+  //         ticket: {
+  //           type: type, // type of ticket - can be text, link, or photo. string.
+  //           data: data,  // actual data
+  //           upvotes: 0, // following is scoring metrics for each given ticket
+  //           downvotes: 0,
+  //         }
+  //       }
+  //     )
+  //     // upload new ticket to firebase
+  //     db.collection("ticket").doc(data).add(this.ticket);
+  //   } else {  // when we get a hit
+  //     // copy over data from firebase ticket to local ticket state
+  //     db.collection("ticket")
+  //       .doc(ret)
+  //       .get()
+  //       .then(documentSnapshot => {
+  //         this.type = documentSnapshot.get("type");
+  //         this.data = documentSnapshot.get("data");
+  //         this.upvotes = documentSnapshot.get("upvotes");
+  //         this.downvotes = documentSnapshot.get("downvotes");
+  //       });
+  //   }
+  // }
 
-    // go through database, check for a hit on all tickets for matching data and data
-    const ret = this.checkTicket(data, type);
-    // if miss, make new local ticket
-    if (ret === 0) {
-      this.setState(  // set local state to that of new ticket
-        {
-          currPage: this.state.currPage,
-          ticket: {
-            type: type, // type of ticket - can be text, link, or photo. string.
-            data: data,  // actual data
-            upvotes: 0, // following is scoring metrics for each given ticket
-            downvotes: 0,
-          }
-        }
-      )
-      // upload new ticket to firebase
-      db.collection("ticket").doc(data).add(this.ticket);
-    } else {  // when we get a hit
-      // copy over data from firebase ticket to local ticket state
-      db.collection("ticket")
-        .doc(ret)
-        .get()
-        .then(documentSnapshot => {
-          this.type = documentSnapshot.get("type");
-          this.data = documentSnapshot.get("data");
-          this.upvotes = documentSnapshot.get("upvotes");
-          this.downvotes = documentSnapshot.get("downvotes");
-        });
-    }
-  }
+  // // function to increase ticket upvote state field by 1
+  // plusUpScore = () => {
+  //   this.setState({
+  //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+  //       type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+  //       data: this.state.ticket.data,
+  //       upvotes: this.state.ticket.upvotes + 1, // following is scoring metrics for each given ticket
+  //       downvotes: this.state.ticket.downvotes
+  //     }
+  //   })
+  // }
 
-  // function to increase ticket upvote state field by 1
-  plusUpScore = () => {
-    this.setState({
-      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
-        data: this.state.ticket.data,
-        upvotes: this.state.ticket.upvotes + 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
-      }
-    })
-  }
+  // minusUpScore = () => {
+  //   this.setState({
+  //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+  //       id: this.state.ticket.id,  // unique ID for each ticket
+  //       type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+  //       data: this.state.ticket.data,
+  //       upvotes: this.state.ticket.upvotes - 1, // following is scoring metrics for each given ticket
+  //       downvotes: this.state.ticket.downvotes
+  //     }
+  //   })
+  // }
 
-  minusUpScore = () => {
-    this.setState({
-      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-        id: this.state.ticket.id,  // unique ID for each ticket
-        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
-        data: this.state.ticket.data,
-        upvotes: this.state.ticket.upvotes - 1, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes
-      }
-    })
-  }
+  // // function to increase downvote by 1
+  // plusDownScore = () => {
+  //   this.setState({
+  //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+  //       id: this.state.ticket.id,  // unique ID for each ticket
+  //       type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+  //       data: this.state.ticket.data,
+  //       upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
+  //       downvotes: this.state.ticket.downvotes + 1
+  //     }
+  //   })
+  // }
 
-  // function to increase downvote by 1
-  plusDownScore = () => {
-    this.setState({
-      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-        id: this.state.ticket.id,  // unique ID for each ticket
-        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
-        data: this.state.ticket.data,
-        upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes + 1
-      }
-    })
-  }
+  // minusDownScore = () => {
+  //   this.setState({
+  //     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+  //       id: this.state.ticket.id,  // unique ID for each ticket
+  //       type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+  //       data: this.state.ticket.data,
+  //       upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
+  //       downvotes: this.state.ticket.downvotes - 1
+  //     }
+  //   })
+  // }
 
-  minusDownScore = () => {
-    this.setState({
-      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
-        id: this.state.ticket.id,  // unique ID for each ticket
-        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
-        data: this.state.ticket.data,
-        upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
-        downvotes: this.state.ticket.downvotes - 1
-      }
-    })
-  }
-
-  handleHome = () => {
-    this.setState({ currPage: "Home" })
-    window.location.reload(false);
-  }
 
   render() {
-    let thispage = <Home />
-    if (this.state.currPage === "Home") {
-      thispage = <Home ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
-    } else if (this.state.currPage === "Tickets") {
-      thispage = <Tickets />
-    } else if (this.state.currPage === "Content") {
-      thispage = <Content minusDown={this.minusDownScore} minusUp={this.minusUpScore} plusDown={this.plusDownScore} plusUp={this.plusUpScore} ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
-    }
     return (
-      <div className="App">
-        <header className="App-header">
+      <Router>
+        <div className="App App-header">
           <nav fixed="top" class="nav">
             <ul>
-              <li class="brand"><a href="" onClick={this.handleHome}>VERA</a></li>
-              <li>How to Use</li>
+              <li class="brand"><Link to="/">VERA</Link></li>
+              <li><Link to="/howto">How to Use</Link></li>
+              <li><Link to="/articles">Articles</Link></li>
             </ul>
           </nav>
-          {thispage}
-        </header>
-      </div>
+          <Switch>
+            <Route exact path="/articles" component={withRouter(Content)} />
+            <Route exact path="/" component={withRouter(Home)} />
+            <Route exact path="/howto"></Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

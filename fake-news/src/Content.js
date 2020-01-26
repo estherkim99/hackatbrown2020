@@ -1,89 +1,114 @@
 import React, { Component } from 'react';
 import c from "classnames";
 import uuid from 'uuid';
-import Comments from './components/Comments.js'
-import Display from './components/Display.js'
+import Comments from './components/Comments.js';
+import Display from './components/Display.js';
+import Entry from "./components/Entry.js";
 
 class Content extends Component {
 
     state = {
-        upvotes: this.props.ticket.upvotes,
-        downvotes: this.props.ticket.downvotes,
+        // upvotes: this.props.ticket.upvotes,
+        // downvotes: this.props.ticket.downvotes,
         downvoteActive: false,
         upvoteActive: false,
         commentInput: null,
-        comments: []
-    }
-
-    setDownvote() {
-        if (this.state.downvoteActive) {
-            this.props.minusDown();
-        } else {
-            this.props.plusDown();
-        }
-        this.setState({
-            downvoteActive: !this.state.downvoteActive  // flips
-        })
+        comments: [],
+        contents: [],
+        text: null
 
     }
 
-    setUpvote() {
-        if (this.state.upvoteActive) {
-            this.props.minusUp();
-        } else {
-            this.props.plusUp();
-        }
-        this.setState({
-            upvoteActive: !this.state.upvoteActive  // flips
-        })
-
+    getFromContext = () => {
+        return (<Entry.Consumer>
+            {set => {
+                this.state.contents.push(set.data);
+                this.state.text = set.data;
+            }}
+        </Entry.Consumer>)
     }
 
-    handleDownvote() {
-        if (this.state.upvoteActive) {
-            this.setDownvote();
-            this.setUpvote();
-        }
-        this.setDownvote();
-    }
+    // setDownvote() {
+    //     if (this.state.downvoteActive) {
+    //         this.props.minusDown();
+    //     } else {
+    //         this.props.plusDown();
+    //     }
+    //     this.setState({
+    //         downvoteActive: !this.state.downvoteActive  // flips
+    //     })
 
-    handleUpvote() {
-        if (this.state.downvoteActive) {
-            this.setUpvote();
-            this.setDownvote();
-        }
-        this.setUpvote();
-    }
+    // }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        const newComment = {
-            commentId: uuid.v4(),
-            ticketId: this.props.ticket.id,
-            commentText: this.state.commentInput
-        }
-        this.setState({
-            comments: [...this.state.comments, newComment],
-            commentInput: ''
-        })
-    }
+    // setUpvote() {
+    //     if (this.state.upvoteActive) {
+    //         this.props.minusUp();
+    //     } else {
+    //         this.props.plusUp();
+    //     }
+    //     this.setState({
+    //         upvoteActive: !this.state.upvoteActive  // flips
+    //     })
 
-    onChange = (e) => {
-        this.setState({
-            commentInput: e.target.value
-        })
-    }
+    // }
+
+    // handleDownvote() {
+    //     if (this.state.upvoteActive) {
+    //         this.setDownvote();
+    //         this.setUpvote();
+    //     }
+    //     this.setDownvote();
+    // }
+
+    // handleUpvote() {
+    //     if (this.state.downvoteActive) {
+    //         this.setUpvote();
+    //         this.setDownvote();
+    //     }
+    //     this.setUpvote();
+    // }
+
+    // onSubmit = (e) => {
+    //     e.preventDefault();
+    //     const newComment = {
+    //         commentId: uuid.v4(),
+    //         ticketId: this.props.ticket.id,
+    //         commentText: this.state.commentInput
+    //     }
+    //     this.setState({
+    //         comments: [...this.state.comments, newComment],
+    //         commentInput: ''
+    //     })
+    // }
+
+    // onChange = (e) => {
+    //     this.setState({
+    //         commentInput: e.target.value
+    //     })
+    // }
 
     render() {
+
+        if (this.state.text == null) {
+            alert("empty");
+        }
+        this.getFromContext();
+        if (this.state.contents[0] == null) {
+            alert("empty array");
+        }
+        if (this.state.text == null) {
+            alert("empty");
+        }
         return (
             <div class="content-container">
-                <section class="content-display">
-                    <Display ticket={this.props.ticket}/>
-                </section>
+                {/* <section class="content-display">
+                    <Display ticket={this.props.ticket} /> */}
+                {/* </section> */}
                 <section class="content-analysis">
                     <div>
                         <div class="scores-container">
-                            <h2 >Truthworthiness :
+
+                            {/* <h2 >Truthworthiness :
                             {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
                             <h3>Upvotes: {this.props.ticket.upvotes}</h3>
                             <h3>Downvotes: {this.props.ticket.downvotes}</h3>
@@ -99,10 +124,11 @@ class Content extends Component {
                                 onClick={() => this.handleDownvote()}
                             >Downvote<br />
                                 {this.props.ticket.downvotes}
-                            </button>
+                            </button> */}
                         </div>
                         <h2>Comments</h2>
-                        <div class="comment">
+                        <p>{this.state.text}</p>
+                        {/* <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
                                 <input
                                     type="text"
@@ -120,7 +146,7 @@ class Content extends Component {
                                 />
                             </form>
                             <Comments comments={this.state.comments} />
-                        </div>
+                        </div> */}
                     </div>
                 </section>
             </div >

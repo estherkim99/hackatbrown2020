@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Entry from '../components/Entry.js';
+import Content from '../Content.js';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 
 class Home extends Component {
     constructor(props) {
@@ -15,17 +18,8 @@ class Home extends Component {
             searchType: event.target.value,
             data: this.state.data
         });
-        // alert("You have selected " + event.target.value);
     }
 
-    // handles image upload, logs if triggered
-    onChangeHandler = event => {
-        this.setState({
-            searchType: this.state.searchType,
-            data: event.target.files[0]
-        })
-
-    }
 
     handleChange(event) {
         this.setState({
@@ -34,13 +28,25 @@ class Home extends Component {
         });
     }
 
+
+
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.setTicket(this.state.data, this.state.searchType);
-        // this.props.setTicketData(this.state.data);
-        // this.props.toggle();
-    }
 
+        this.props.history.push('/articles');
+        const val = {
+            submitterName: "Guest",
+            dataType: this.state.searchType,
+            data: this.state.data,
+            upvotes: 0,
+            downvotes: 0,
+            comments: [],
+            id: Entry.id + 1
+        }
+        return (<Entry.Provider value={val}>
+            <Content />
+        </Entry.Provider >)
+    }
     render() {
         let searchBox = '';
         if (this.state.searchType === 'link') {
@@ -95,12 +101,6 @@ class Home extends Component {
         }
         return (
             <body>
-                <div>
-
-                </div>
-                <div>
-
-                </div>
                 <div class="descript">
                     <hl>We are the first crowdsourced platform on the internet harnessing the power of the public to verify the truthfulness of forwarded messages and media.<br /><br />
                         If you received a photo, message or link that you'd like to verify, select the appropriate type from the dropdown box below and upload your ticket to continue.</hl>
@@ -117,4 +117,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default withRouter(Home);
