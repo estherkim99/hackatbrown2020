@@ -81,23 +81,25 @@ class Content extends Component {
                 </section>
                 <section class="content-analysis">
                     <div>
-                        <h2>Truthworthiness :
+                        <div class="scores-container">
+                            <h2 >Truthworthiness :
                             {Number(((100 * (this.props.ticket.upvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes))).toFixed(0))}</h2>
-                        <h3>Upvotes: {this.props.ticket.upvotes}</h3>
-                        <h3>Downvotes: {this.props.ticket.downvotes}</h3>
+                            <h3>Upvotes: {this.props.ticket.upvotes}</h3>
+                            <h3>Downvotes: {this.props.ticket.downvotes}</h3>
 
-                        <button
-                            onClick={() => this.handleUpvote()}
-                            className={c({ ["active"]: this.state.upvoteActive })}
-                        >
-                            {this.props.ticket.upvotes}
-                        </button>
-                        <button
-                            className={c({ ["active"]: this.state.downvoteActive })}
-                            onClick={() => this.handleDownvote()}
-                        >
-                            {this.props.ticket.downvotes}
-                        </button>
+                            <button
+                                onClick={() => this.handleUpvote()}
+                                className={c({ ["active"]: this.state.upvoteActive })}
+                            >Upvote<br />
+                                {this.props.ticket.upvotes}
+                            </button>
+                            <button
+                                className={c({ ["active"]: this.state.downvoteActive })}
+                                onClick={() => this.handleDownvote()}
+                            >Downvote<br />
+                                {this.props.ticket.downvotes}
+                            </button>
+                        </div>
                         <h2>Comments</h2>
                         <div class="comment">
                             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
