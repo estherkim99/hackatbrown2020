@@ -43,7 +43,7 @@ class Home extends Component {
 
     render() {
         let searchBox = '';
-        if (this.state.searchType == 'link') {
+        if (this.state.searchType === 'link') {
             searchBox =
                 <form onSubmit={this.onSubmit}>
                     <input                     
@@ -60,7 +60,7 @@ class Home extends Component {
                         style={{ flex: '1' }}/>
                 </form>
 
-        } else if (this.state.searchType == 'picture') {
+        } else if (this.state.searchType === 'picture') {
             searchBox = 
             <form onSubmit={this.onSubmit}>
                 <div>
@@ -74,7 +74,7 @@ class Home extends Component {
             </form>
            
 
-        } else if (this.state.searchType == "text") {
+        } else if (this.state.searchType === "text") {
             searchBox =
                 <form onSubmit={this.onSubmit}>
                     <input                     
