@@ -14,7 +14,7 @@ class Content extends Component {
         this.setState({
             downvoteActive: !this.state.downvoteActive  // flips
         })
-        if (this.state.downvoteActive) {
+        if (!this.state.downvoteActive) {
             this.props.minusDown();
         } else {
             this.props.plusDown();
@@ -24,9 +24,9 @@ class Content extends Component {
 
     setUpvote() {
         this.setState({
-        upvoteActive: !this.state.upvoteActive  // flips
+            upvoteActive: !this.state.upvoteActive  // flips
         })
-        if (this.state.upvoteActive) {
+        if (!this.state.upvoteActive) {
             this.props.minusUp();
         } else {
             this.props.plusUp();
@@ -59,8 +59,8 @@ class Content extends Component {
                 <section class="content-analysis">
                     <div>
                         <h2>Truthworthiness : {(this.props.ticket.upvotes - this.props.ticket.downvotes) / (this.props.ticket.upvotes + this.props.ticket.downvotes)}</h2>
-                        <h3>User Votes: {this.props.ticket.upvotes}</h3>
-                        <h3>Vera Score: {this.props.ticket.downvotes}</h3>
+                        <h3>Upvotes: {this.props.ticket.upvotes}</h3>
+                        <h3>Downvotes: {this.props.ticket.downvotes}</h3>
                     </div>
 
                     <div>
