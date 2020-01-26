@@ -7,7 +7,13 @@ export class Display extends Component {
         if (this.props.ticket.type === "picture") {
             // return picture
             const pic = './pudding.jpeg';
-            return <img src={pic} alt="Logo" />;
+            return (
+                <div>
+                    <p>
+                        <img src={pic} alt="Logo" />
+                    </p>
+                </div>
+            )
         } else {
             return (
                 <div>
