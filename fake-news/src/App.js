@@ -19,7 +19,7 @@ class App extends Component {
   // set up way to switch between home and tickets pages
 
   state = {
-    currPage: "Home", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
+    currPage: "Content", // should be kept client-side, determines which js is shown (Home.js or Tickets.js)
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       id: null,  // unique ID for each ticket
@@ -65,43 +65,69 @@ class App extends Component {
 
   // checks for a hit in the firebase, returns 0 if miss, returns ticket id otherwise
   checkTicket = (data, type) => {
-    const snapshot = db.collection("ticket").where("data", "==", data).get();
-    if(snapshot.empty){
-      return 0;
-    }
-    else{
-      docSnapshots = snapshot.docs;
-      const doc = docSnapshots[0].data();
-      return doc.id;
-    }
+    // const snapshot = db.collection("ticket").where("data", "==", data).get();
+    // if(snapshot.empty){
+    //   return 0;
+    // }
+    // else{
+    //   // docSnapshots = snapshot.docs;
+    //   // const doc = docSnapshots[0].data();
+    //   // return doc.id;
+    // }
   }
 
   // makes new ticket with new id from uuid v4 extension, correct type/url, and zeroed upvotes downvotes
-  setTicket = (data, type) => {
+  // setTicket = (data, type) => {
 
-    // go through database, check for a hit on all tickets for matching data and data
-    const ret = checkTicket(data, type);
-    // if miss, make new local ticket
-    if(ret === 0){
-      this.setState(  // set local state to that of new ticket
-        {
-          currPage: this.state.currPage,
-          ticket: {
-            id: uuid.v4(),  // unique ID for each ticket
-            type: type, // type of ticket - can be text, link, or photo. string.
-            data: data,  // actual data
-            upvotes: 0, // following is scoring metrics for each given ticket
-            downvotes: 0,
-          }
-        }
-      )
-      // upload new ticket to firebase 
-    } else {  // when we get a hit
-      // copy over data from firebase ticket to local ticket state
-    }
+  //   // go through database, check for a hit on all tickets for matching data and data
+  //   const ret = checkTicket(data, type);
+  //   // if miss, make new local ticket
+  //   if(ret === 0){
+  //     this.setState(  // set local state to that of new ticket
+  //       {
+  //         currPage: this.state.currPage,
+  //         ticket: {
+  //           id: uuid.v4(),  // unique ID for each ticket
+  //           type: type, // type of ticket - can be text, link, or photo. string.
+  //           data: data,  // actual data
+  //           upvotes: 0, // following is scoring metrics for each given ticket
+  //           downvotes: 0,
+  //         }
+  //       }
+  //     )
+  //     // upload new ticket to firebase 
+  //   } else {  // when we get a hit
+  //     // copy over data from firebase ticket to local ticket state
+  //   }
 
-    // switch to content page once data and state has been set
-    this.togglePageFlag();
+  //   // switch to content page once data and state has been set
+  //   this.togglePageFlag();
+  // }
+
+  // function to increase ticket upvote state field by 1
+  upScore = () => {
+    this.setState({
+      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+        id: this.state.ticket.id,  // unique ID for each ticket
+        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+        data: this.state.ticket.data,
+        upvotes: this.state.ticket.upvotes + 1, // following is scoring metrics for each given ticket
+        downvotes: this.state.ticket.downvotes
+      }
+    })
+  }
+
+  // function to increase downvote by 1
+  decrementScore = () => {
+    this.setState({
+      ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
+        id: this.state.ticket.id,  // unique ID for each ticket
+        type: this.state.ticket.type, // type of ticket - can be text, link, or photo. string.
+        data: this.state.ticket.data,
+        upvotes: this.state.ticket.upvotes, // following is scoring metrics for each given ticket
+        downvotes: this.state.ticket.downvotes + 1
+      }
+    })
   }
 
   render() {
@@ -111,7 +137,7 @@ class App extends Component {
     } else if (this.state.currPage === "Tickets") {
       thispage = <Tickets />
     } else if (this.state.currPage === "Content") {
-      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag} />
+      thispage = <Content ticket={this.state.ticket} toggle={this.togglePageFlag} setTicket={this.setTicket} setTicketData={this.setTicketData} />
     }
     return (
       <div className="App">

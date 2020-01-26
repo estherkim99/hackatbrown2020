@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
 
 class Content extends Component {
+
+    state = {
+        upvotes: this.props.ticket.upvotes,
+        downvotes: this.props.ticket.downvotes,
+        downvoteActive: false,
+        upvoteActive: false
+    }
+
+    setDownvote() {
+        this.setState({
+            downvoteActive: !this.state.downvoteActive  // flips
+        })
+        
+    }
+
+    setUpvote() {
+
+    }
+
     render() {
         return (
             <div class="content-container">
