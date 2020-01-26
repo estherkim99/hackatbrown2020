@@ -116,8 +116,8 @@ class Content extends Component {
                                     style={{ flex: '1' }}
                                 />
                             </form>
+                            <Comments comments={this.state.comments} />
                         </div>
-                        <Comments comments={this.state.comments} />
                     </div>
                 </section>
             </div >

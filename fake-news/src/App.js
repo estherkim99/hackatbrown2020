@@ -33,7 +33,7 @@ class App extends Component {
 
     ticket: { // represents ticket user can currently see. should always be synced to the database. set here w/ default values for now.
       type: null, // type of ticket - can be text, link, or photo. string.
-      data: null,
+      data: "This program is intended primarily for freshmen and sophomores. If selected, you will be matched with an upperclassman who will be your mentor through the recruiting season to help guide you through resume reviews, networking, and interview preparation. Our mentors are experienced juniors or seniors who have successfully landed or completed internships at major investment banks (GS, PWP, etc.) or investment firms. You will also have access to further opportunities with firms coming to campus including resume books and smaller networking sessions. ",
       upvotes: 0, // following is scoring metrics for each given ticket
       downvotes: 0,
     }
